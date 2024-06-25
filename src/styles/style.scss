@@ -1,0 +1,646 @@
+$desktop: "only screen and (min-width: 960px)";
+$tablet: "only screen and (min-width: 720px)";
+$mobileMax: "only screen and (min-width: 470px)";
+$mobile: "only screen and (min-width: 375px)";
+
+.sus--bh-finder {
+  max-width: 1170px;
+  margin: 0 auto;
+}
+
+.cmsContent--bh-finder {
+  > .dd-ve-container {
+    @media (max-width: 719px) {
+      padding: 0 !important;
+    }
+  }
+
+  .trenner > span::after {
+    width: 100%;
+  }
+}
+
+.bh-finder__startInfo {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #f7f7f7;
+
+  .bh-finder__startInfo-image-wrapper {
+    width: 100%;
+    position: relative;
+
+    img {
+      width: 100%;
+    }
+
+    h1 {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      margin: 0;
+      color: #ffffff;
+      font-size: 39px;
+      width: 100%;
+      background: rgba(77, 75, 80, 0.5);
+      text-align: center;
+      padding: 8px 0;
+    }
+
+    @media #{$tablet} {
+      width: 65%;
+
+      h1 {
+        display: none;
+      }
+    }
+  }
+
+  .startInfo__content {
+    width: 100%;
+    padding: 8px 15px;
+
+    h1 {
+      display: none;
+    }
+
+    .bh-finder__next {
+      width: 100%;
+    }
+
+    @media #{$tablet} {
+      width: 35%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      h1 {
+        display: inline-block;
+        text-align: center;
+      }
+
+      h1,
+      .bh-finder__welcomeText {
+        margin-bottom: 1rem;
+      }
+    }
+
+    @media #{$desktop} {
+      h1,
+      .bh-finder__welcomeText {
+        margin-bottom: 3rem;
+      }
+    }
+  }
+
+  @media #{$tablet} {
+    flex-wrap: nowrap;
+  }
+}
+
+.bh-finder__questionWrapper,
+.bh-finder__productListWrapper {
+  margin: 0 auto;
+  padding: 8px 15px;
+  background-color: #f7f7f7;
+
+  .fa-info-circle {
+    cursor: pointer;
+  }
+}
+
+.bh-finder__questionWrapper--hidden {
+  visibility: hidden;
+}
+
+.bh-finder__question {
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+
+  @media #{$mobile} {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media #{$mobileMax} {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media #{$tablet} {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  @media #{$desktop} {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  &--disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+}
+
+.bh-finder__question-edit {
+  text-align: right;
+}
+
+.bh-finder__questionText {
+  font-size: 1em;
+  margin-top: 8px;
+}
+
+.small-text {
+  font-size: 1.2rem;
+}
+
+.bh-finder__questionText--bold {
+  font-weight: bold;
+}
+
+.bh-finder__selection {
+  padding: 0 15px;
+
+  .bh-finder__option {
+    margin: 4px;
+  }
+}
+
+.bh-finder__deselectFilterWrapper {
+  padding: 8px 16px;
+  background-color: #f7f7f7;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+
+  @media #{$tablet} {
+    display: flex;
+    flex-wrap: wrap;
+
+    p {
+      width: 100%;
+    }
+
+    .bh-finder__selectionWrapper {
+      &--size {
+        width: 100%;
+      }
+      &--selection {
+        width: 50%;
+      }
+    }
+  }
+}
+
+.bh-finder__deselectFilterTitle {
+  margin-bottom: 0;
+  font-weight: bold;
+}
+
+.bh-finder__hint {
+  margin-top: 0;
+  font-style: italic;
+  font-size: 13px;
+}
+
+.bh-finder__selectionText {
+  margin: 0;
+}
+
+.bh-finder__indicator {
+  color: #fff;
+  background: #4d4b50;
+  border-radius: 2px;
+  padding: 4px 8px;
+  font-size: 0.8em;
+}
+
+.bh-finder__next {
+  display: block;
+  cursor: pointer;
+  text-align: center;
+
+  @media #{$tablet} {
+    min-width: 200px;
+  }
+
+  &--stretch {
+    width: 100%;
+    min-height: 40px;
+    padding: 5px;
+
+    @media #{$mobile} {
+      padding: 10px;
+      min-height: 50px;
+    }
+
+    @media #{$tablet} {
+      width: auto;
+    }
+  }
+
+  &--hint {
+    font-size: 13px;
+  }
+}
+
+.bh-finder__resultLinkWrapper {
+  flex: 0 0 29%;
+}
+
+.bh-finder__resultLink {
+  padding-left: 0;
+  line-height: 1em;
+  font-size: 1em;
+  text-decoration: underline;
+}
+
+.bh-finder__option {
+  padding: 4px;
+  border: 2px solid white;
+  display: inline-block;
+  cursor: pointer;
+  background-color: white;
+  text-align: center;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  @media #{$tablet} {
+    padding: 8px;
+  }
+
+  &--selected {
+    border-color: #e08699;
+    background-color: #eee;
+  }
+
+  &--active {
+    border-color: #e08699;
+  }
+
+  &--disabled {
+    pointer-events: none;
+  }
+
+  &--inactive {
+    opacity: 0.3;
+    pointer-events: none;
+    position: relative;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M1 0 L0 1 L99 100 L100 99' fill='black' /><path d='M0 99 L99 0 L100 1 L1 100' fill='black' /></svg>")
+      no-repeat center center;
+    background-size: 100% 100%, auto;
+  }
+
+  &--inactive-wildcard {
+    opacity: 0.3;
+  }
+
+  &--small {
+    padding: 2px 4px;
+  }
+
+  &:hover {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.bh-finder__sizeOptionList {
+  padding: 0;
+  display: flex;
+}
+
+.bh-finder__sizeOption {
+  margin: 4px;
+  list-style: none;
+  border: 1px solid gray;
+  padding: 6px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+
+  .bh-finder__option {
+    padding: 8px;
+  }
+}
+
+.bh-finder__option .bh-finder__optionImage {
+  max-width: 100px;
+  display: block;
+  margin: auto;
+}
+
+.bh-finder__option .bh-finder__optionImage-big {
+  max-width: 100%;
+  display: block;
+  margin: auto;
+}
+
+.bh-finder__option--small {
+  max-height: 50px;
+  display: inline-flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+.bh-finder__actionBar {
+  padding: 8px 15px;
+  background-color: #f9e7eb;
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  gap: 5px;
+  align-items: stretch;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  @media #{$tablet} {
+    justify-content: normal;
+  }
+
+  & > div {
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 33%;
+
+    @media #{$tablet} {
+      flex: 0 0 0;
+      padding: 0 16px;
+    }
+  }
+
+  & > div:last-child {
+    @media #{$tablet} {
+      border-right: none;
+      padding-right: 0;
+    }
+  }
+
+  @media #{$tablet} {
+    .bh-finder__actionBar--total {
+      order: 1;
+    }
+    .bh-finder__resultLinkWrapper {
+      order: 2;
+      margin-left: auto;
+    }
+    .bh-finder__next {
+      order: 3;
+    }
+    .bh-finder__next--right {
+      margin-left: auto;
+    }
+  }
+}
+
+.bh-finder__resultsCount {
+  display: inline-block;
+  font-size: 2.5em;
+}
+
+.bh-finder__resultsLabel {
+  display: inline-block;
+  line-height: 1em;
+  margin-left: 4px;
+}
+
+.bh-finder__moreButtonWrapper {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.bh-finder__productListWrapper-options {
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: inline-block;
+  }
+}
+
+.bh-finder__productListWrapper-option {
+  text-decoration: underline;
+}
+
+.bh-finder__productListBoxWrapper {
+  margin-left: -15px;
+  margin-right: -15px;
+  padding: 0;
+}
+
+.bh-finder__moreButton {
+  display: flex;
+  font-size: 2em;
+  margin-top: -24px;
+  background-color: #4d4b50;
+  padding: 16px;
+  width: 2em;
+  text-align: center;
+  border-radius: 100%;
+  height: 2em;
+  color: white;
+  border: none;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #e08699;
+  }
+
+  i {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.bh-finder__welcomeText {
+  padding: 0;
+  font-size: 1em;
+}
+
+.bh-finder__otherResultsTitle {
+  font-size: 1.4em;
+  margin-top: 2.5rem;
+}
+
+.bh-finder__sizeLink {
+  display: block;
+  border: none;
+  color: #333;
+  background-color: transparent;
+  padding: 4px 8px 4px 0px;
+  display: inline-block;
+  text-decoration: underline !important;
+
+  @media #{$tablet} {
+    display: inline-block;
+  }
+
+  &:hover {
+    color: #4d4b50;
+  }
+}
+
+.bh-finder__sizeLinkText {
+  display: block;
+  margin: 8px 0px 0px 0px;
+  @media #{$tablet} {
+    display: inline-block;
+  }
+}
+
+.bh-finder__sizeLink--bold {
+  font-weight: bold;
+}
+
+.bh-finder__trenner {
+  opacity: 0.2;
+
+  i {
+    border-color: #f7f7f7;
+    background: #f7f7f7;
+  }
+}
+
+.trenner.bh-finder__trenner > span:after {
+  width: 100%;
+}
+
+@media (max-width: 470px) {
+  .trenner.bh-finder__trenner > span:after {
+    width: 100%;
+  }
+}
+
+.bh-finder__sizeInfoTextWrapper {
+  padding: 8px;
+  background: white;
+  margin-bottom: 16px;
+}
+
+.bh-finder__sizeInfoText {
+  padding: 8px 0;
+  margin-bottom: 0;
+}
+
+.bh-finder__closeIcon {
+  border: none;
+  display: block;
+  float: right;
+}
+
+.bh-finder__sizeCalculator {
+  display: flex;
+  flex-direction: column;
+
+  @media #{$tablet} {
+    flex-direction: row;
+  }
+}
+
+.bh-finder__sizeCalculatorForm {
+  min-width: 100%;
+  @media #{$tablet} {
+    min-width: 30%;
+  }
+}
+.bh-finder__sizeCalculatorFormTitle {
+  font-weight: bold;
+  margin: 8px 0px;
+}
+
+.bh-finder__sizeCalculatorInput {
+  display: block;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #cdcccb;
+  padding: 8px;
+  margin: 8px 0px;
+}
+
+.bh-finder__sizeCalculatorResult {
+  font-weight: bold;
+  margin: 16px 0px 8px 0px;
+}
+.bh-finder__tapeMeasure {
+  background-color: #efdadd;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.bh-finder__sizeCalculatorTipTitle {
+  font-weight: bold;
+  text-align: center;
+
+  @media #{$tablet} {
+    text-align: left;
+  }
+}
+.bh-finder__sizeCalculatorTipText {
+  width: 100%;
+  @media #{$tablet} {
+    width: auto;
+    margin-left: 16px;
+  }
+}
+.bh-finder__sizeCalculatorTip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 24px 0 0 0;
+  @media #{$tablet} {
+    margin: 0 0 0 48px;
+    flex-direction: row;
+  }
+}
+
+.bh-finder__sizeCalculatorImage {
+  max-width: 250px;
+}
+
+.bh-finder__sizeCalculatorItem {
+  padding-left: 20px;
+  text-indent: -10px;
+  margin-bottom: 5px;
+
+  &:before {
+    content: "\f00c";
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 5px;
+  }
+}
+
+.bh-finder__linkButton {
+  border: none;
+  padding: 0;
+  color: #e08699;
+  text-decoration: underline;
+}
+
+.bh-finder__restartBar {
+  padding: 8px 15px;
+  background-color: #f9e7eb;
+  display: flex;
+  align-items: stretch;
+  @media #{$tablet} {
+    justify-content: flex-end;
+  }
+
+  button {
+    width: 100%;
+    @media #{$tablet} {
+      width: auto;
+    }
+  }
+}
