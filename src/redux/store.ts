@@ -1,17 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import stepsReducer from "./reducers/steps";
 import sizeReducer from "./reducers/size";
-
-// export const store = configureStore({
-//   reducer: {
-//     steps: stepsReducer,
-//   },
-// });
+import filterReducer from "./reducers/filter";
 
 const rootReducer = combineReducers({
   steps: stepsReducer,
   sizes: sizeReducer,
-  // andere Reducer
+  filter: filterReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

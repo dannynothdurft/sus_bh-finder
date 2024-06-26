@@ -320,6 +320,14 @@ $mobile: "only screen and (min-width: 375px)";
   }
 }
 
+.bh-finder__sizeOption--selected {
+  background-color: #eee;
+}
+
+.bh-finder__sizeOption--active {
+  border-color: #e08699;
+}
+
 .bh-finder__option .bh-finder__optionImage {
   max-width: 100px;
   display: block;

@@ -71,7 +71,9 @@ function Question(props) {
           />
         )}
         {question.optionsType === "size" ? (
-          <SizeSelector startSizes={sizes} {...props} isAnswered={isAnswered} />
+          <SizeSelector
+          //startSizes={sizes} 
+          {...props} isAnswered={isAnswered} />
         ) : (
           <ul
             className={`bh-finder__question ${

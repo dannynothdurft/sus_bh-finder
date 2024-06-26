@@ -4,7 +4,7 @@ import Config from "../lang/configDE";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
-import { incrementStep1 } from "../redux/reducers/steps";
+import { incrementStep1, incrementStep2 } from "../redux/reducers/steps";
 import { incrementSize } from "../redux/reducers/size";
 
 // Components
@@ -22,8 +22,12 @@ function BHFinder() {
   const currencySign = "€";
 
   const dispatch = useDispatch();
-  const { step1 } = useSelector((state) => state.steps);
+  const { step1, step2 } = useSelector((state) => state.steps);
   const { sizes } = useSelector((state) => state.sizes);
+  const { filterSize } = useSelector((state) => state.filter);
+  const hasSelectedSizes = filterSize ? true : false;
+
+  console.log(step1)
 
   //? Dieser Abschnitt ruft alle "Bra"-Produkttypen von Shopify ab. Anschließend wird ein Objekt erstellt, in dem jede Größe einmal aufgeführt ist.
   useEffect(() => {
@@ -92,12 +96,9 @@ function BHFinder() {
 
                     if (match && match.length === 3) {
                       const [sizePart, cupPart] = match[1].split("/");
-                      const fullSize = match[2];
-                      const size = fullSize.match(/^\d+/)?.[0];
-                      const cup = fullSize.match(/[A-Za-z]+$/)?.[0];
 
                       const key = `${sizePart} | ${cupPart}`;
-                      const value = `${size} | ${cup}`;
+                      const value = match[2];
 
                       sizeMap[key] = value;
                     }
@@ -117,7 +118,7 @@ function BHFinder() {
     }
   }, [sizes, dispatch]);
 
-  const updateTest = async () => {
+  const getArticels = async () => {
     try {
       const response = await fetch(
         "https://stage-sugarshape.myshopify.com/api/2024-04/graphql.json",
@@ -133,7 +134,7 @@ function BHFinder() {
             query searchProducts($productFilters: [ProductFilter!]!) {
               search(
                 query: "",
-                first: 100,
+                first: 250,
                 types: PRODUCT,
                 productFilters: $productFilters
               ) {
@@ -148,7 +149,7 @@ function BHFinder() {
                   variantMetafield: {
                     namespace: "bhs",
                     key: "groesse",
-                    value: "75 | 92,5",
+                    value: filterSize,
                   },
                 },
               ],
@@ -208,7 +209,6 @@ function BHFinder() {
 
   const [activeSizeConfig, setActiveSizeConfig] = useState(null);
   const [lastSelectedSecondSize, setLastSelectedSecondSize] = useState("");
-  const [hasSelectedSizes, setHasSelectedSizes] = useState(false);
   const [sizeConfigurations, setSizeConfigurations] = useState([]);
 
   const [isSusSizeType, setIsSusSizeType] = useState(true);
@@ -548,17 +548,17 @@ function BHFinder() {
   //   }
   // }, [visibleQuestions, hasSelectedSizes]);
 
-  // const isOneSelected = () => {
-  //   const isselectedOptions = selectedOptions.some((item) =>
-  //     item.options.some((option) => option.status === "active")
-  //   );
+  const isOneSelected = () => {
+    const isselectedOptions = selectedOptions.some((item) =>
+      item.options.some((option) => option.status === "active")
+    );
 
-  //   return (
-  //     sizeConfigurations.some(
-  //       (configuration) => configuration.baseSize !== ""
-  //     ) || isselectedOptions
-  //   );
-  // };
+    return (
+      sizeConfigurations.some(
+        (configuration) => configuration.baseSize !== ""
+      ) || isselectedOptions
+    );
+  };
 
   const updateSelectedOption = (questionId, optionTitle) => {
     const clickedQuestion = selectedOptions.find(
@@ -821,6 +821,10 @@ function BHFinder() {
    * @param nextQuestion
    */
   const updateVisibleQuestions = (nextQuestion) => {
+    if(step1 === undefined && nextQuestion !== "size") {
+      getArticels();
+    }
+
     if (!nextQuestion) {
       setAnsweredQuestions([...answeredQuestions, currentQuestion]);
       setCurrentQuestion("final");
@@ -911,8 +915,6 @@ function BHFinder() {
 
   return (
     <div className="sus--bh-finder">
-      test <button onClick={updateTest}>update</button>
-      {step1 !== undefined ? step1.totalCount : null}
       <StartInfo
         visibleQuestions={visibleQuestions}
         updateVisibleQuestions={updateVisibleQuestions}
@@ -959,7 +961,7 @@ function BHFinder() {
         }
         return null;
       })}
-      {/*
+  
       <QuestionReview
         selectedOptions={selectedOptions}
         isOneSelected={isOneSelected()}
@@ -982,6 +984,8 @@ function BHFinder() {
         sizeConfigurations={sizeConfigurations}
         setSizeConfigurations={setSizeConfigurations}
       />
+
+      {/*
       {showResults && <RestartBar resetFinder={resetFinder} />}
       <ProductResults
         name="results"
