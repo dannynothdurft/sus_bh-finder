@@ -4,7 +4,7 @@ import Config from "../lang/configDE";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
-import { incrementStep1, incrementStep2 } from "../redux/reducers/steps";
+import { incrementStep1, incrementStep2, incrementStep3, incrementStep4} from "../redux/reducers/steps";
 import { incrementSize } from "../redux/reducers/size";
 
 // Components
@@ -21,13 +21,30 @@ function BHFinder() {
   const imageDesktop = "bh-finder_header_large.jpg";
   const currencySign = "€";
 
+  const getInitIalOptions = () =>
+    Config.questions.map((question) => {
+      return {
+        id: question.id,
+        options: question.options.map((option) => {
+          return {
+            title: option.title,
+            status: "initial",
+            wildcard: option.wildcard,
+            filters: option.attributes,
+            excludes: option.excludes
+          };
+        }),
+      };
+    });
+
   const dispatch = useDispatch();
-  const { step1, step2 } = useSelector((state) => state.steps);
+  const [selectedOptions, setSelectedOptions] = useState(getInitIalOptions());
+  const [step, setStep] = useState(1);
+  const [count, setCount] = useState(0);
+  const { step1, step2, step3, step4 } = useSelector((state) => state.steps);
   const { sizes } = useSelector((state) => state.sizes);
   const { filterSize } = useSelector((state) => state.filter);
   const hasSelectedSizes = filterSize ? true : false;
-
-  console.log(step1)
 
   //? Dieser Abschnitt ruft alle "Bra"-Produkttypen von Shopify ab. Anschließend wird ein Objekt erstellt, in dem jede Größe einmal aufgeführt ist.
   useEffect(() => {
@@ -131,14 +148,36 @@ function BHFinder() {
           },
           body: JSON.stringify({
             query: `
-            query searchProducts($productFilters: [ProductFilter!]!) {
+            query searchProducts($productFilters: [ProductFilter!]!, $identifiers: [HasMetafieldsIdentifier!]!) {
               search(
                 query: "",
                 first: 250,
                 types: PRODUCT,
                 productFilters: $productFilters
               ) {
-                edges { node { ... on Product { id, title } } }
+                edges {
+                  node {
+                    ... on Product {
+                      title
+                      priceRange{
+                          minVariantPrice{
+                              amount
+                              currencyCode
+                          }
+                      }
+                      images(first:2){
+                          nodes{
+                              url
+                          }
+                      }
+                      metafields(identifiers: $identifiers){
+                          namespace
+                          key
+                          value
+                      }
+                    }
+                  }
+                }
                 totalCount
               }
             }
@@ -153,6 +192,76 @@ function BHFinder() {
                   },
                 },
               ],
+              "identifiers" :[
+                {
+                  "namespace": "allgemein",
+                  "key": "kollektion"
+                },
+                {
+                  "namespace": "produkt",
+                  "key": "sugarshapetype"
+                },
+                {
+                  "namespace": "allgemein",
+                  "key": "spitze"
+                },
+                {
+                    "namespace": "bhs",
+                    "key": "schnitt"
+                },
+                {
+                  "namespace": "bhs",
+                  "key": "eigenschaften"
+                },
+                {
+                  "namespace": "bhs",
+                  "key": "wattierung"
+                },
+                {
+                  "namespace": "farbe",
+                  "key": "hex"
+                },
+                {
+                  "namespace": "farbe",
+                  "key": "text"
+                },
+                {
+                  "namespace": "finder",
+                  "key": "style"
+                },
+                {
+                  "namespace": "finder",
+                  "key": "asymmetrisch"
+                },
+                {
+                  "namespace": "finder",
+                  "key": "athletisch"
+                },
+                {
+                  "namespace": "finder",
+                  "key": "entspannt"
+                },
+                {
+                  "namespace": "finder",
+                  "key": "fest"
+                },
+                {
+                  "namespace": "finder",
+                  "key": "mittelfest"
+                },
+                {
+                  "namespace": "finder",
+                  "key": "seitlich"
+                },
+                {
+                  "namespace": "finder",
+                  "key": "traenenfoermig"
+                },
+                {
+                  "namespace": "finder",
+                  "key": "weich"
+                }
+             ]
             },
           }),
         }
@@ -163,28 +272,72 @@ function BHFinder() {
       }
 
       const result = await response.json();
-      dispatch(incrementStep1(result.data.search));
+      dispatch(incrementStep1(result.data.search.edges));
+      setCount(result.data.search.totalCount);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
   };
 
-  //! Das muss alles bearbeitet werden!!
-  const getInitIalOptions = () =>
-    Config.questions.map((question) => {
-      return {
-        id: question.id,
-        options: question.options.map((option) => {
-          return {
-            title: option.title,
-            status: "initial",
-            wildcard: option.wildcard,
-          };
-        }),
-      };
-    });
+  const filterArticle = (step) => {
+    console.log(step1)
+    console.log(step2)
+    
+    //! Es werden noch Artikel Doppelt gefiltert
+    if(step === 2) {
+      const filteredOne = step1.map((art) => {
+        return art.node.metafields.map((meta) => {
+          if (meta !== null) {
+            return selectedOptions[step - 1].options.map((opt) => {
+              if (opt.status === "active") {
+                return opt.filters.map((filterName) => {
+                  if (filterName.name === meta.key && filterName.value === meta.value) {
+                    return art;
+                  }
+                  return null;
+                }).filter(Boolean);
+              }
+              return null;
+            }).flat().filter(Boolean);
+          }
+          return null;
+        }).flat().filter(Boolean);
+      }).flat().filter(Boolean);
+      
+      dispatch(incrementStep2(filteredOne))
+      setStep(3);
+      setCount(filteredOne.length)
+    }
 
-  const [selectedOptions, setSelectedOptions] = useState(getInitIalOptions());
+    if(step === 3) {
+      const filteredSecond = step2.map((art) => {
+        return art.node.metafields.map((meta) => {
+          if (meta !== null) {
+            return selectedOptions[step - 1].options.map((opt) => {
+              console.log(opt)
+              if (opt.status === "active") {
+                return opt.filters.map((filterName) => {
+                  if (filterName.name === meta.key && filterName.value === meta.value) {
+                    return art;
+                  }
+                  return null;
+                }).filter(Boolean);
+              }
+              return null;
+            }).flat().filter(Boolean);
+          }
+          return null;
+        }).flat().filter(Boolean);
+      }).flat().filter(Boolean);
+      
+      console.log(filteredSecond)
+      dispatch(incrementStep3(filteredSecond))
+      setStep(4);
+      setCount(filteredSecond.length)
+    }
+  }
+
+  // Todo: Das muss alles bearbeitet werden!!  
   const [visibleQuestions, setVisibleQuestions] = useState(
     Config.questions.filter((item) => item.show).map((item) => item.id)
   );
@@ -219,334 +372,6 @@ function BHFinder() {
     smooth: true,
     offset: 0,
   };
-
-  /*
-  const getAggregations = (field = "attributes") => {
-    return Config.questions
-      .flatMap((question) => {
-        return question.options.flatMap((option) =>
-          selectedOptions
-            .find((item) => item.id === question.id)
-            .options.find((item) => item.title === option.title).status ===
-          "active"
-            ? option[field]
-            : null
-        );
-      })
-      .filter((x) => x)
-      .reduce((acc, curVal) => {
-        if (!acc[curVal.name]) {
-          acc[curVal.name] = [];
-        }
-
-        if (!acc[curVal.name].includes(curVal.value)) {
-          acc[curVal.name].push(curVal.value);
-        }
-        return acc;
-      }, {});
-  };
-
-  const aggregationsToCustomFilter = (attributes, aggregations) => {
-    return attributes.reduce((acc, curVal) => {
-      if (aggregations[curVal.name]) {
-        acc.push({
-          attribute: curVal.id,
-          operator: "eq",
-          value: aggregations[curVal.name],
-        });
-      }
-      return acc;
-    }, []);
-  };
-
-  const setNewResults = (response, oldResults, setNewResults) => {
-    let newResults = response?.product;
-
-    if (response?.product?.offset > oldResults?.offset) {
-      newResults.items = oldResults.items.concat(newResults.items);
-    }
-
-    setNewResults(newResults);
-  };
-
-  */
-
-  /**
-   * After specific changes we want to fetch new results
-   */
-  // useEffect(() => {
-  //   setHasSelectedSizes(
-  //     sizeConfigurations.some((size) => size.filterSizes.length)
-  //   );
-  // }, [sizeConfigurations]);
-
-  // useEffect(() => {
-  //   let aggregations = getAggregations("attributes");
-
-  //   const constraints = {
-  //     "query.shop_id": 1,
-  //     "query.language": queryLanguage,
-  //     "query.use_stock": false,
-  //   };
-
-  //   const body = {
-  //     aggregations: [],
-  //     constraints,
-  //     isSearch: false,
-  //     enableAggregations: true,
-  //     apiVersion: "2019.9.0-RC1",
-  //     count: "final" === currentQuestion ? Config.pageSize : 0,
-  //     offset: (resultsPage - 1) * Config.pageSize,
-  //     searchPhrase: null,
-  //   };
-
-  //   /**
-  //    *
-  //    * @returns {{not: *[], or: *[], and: *[]}}
-  //    */
-  //   const getCustomFiltersForResults = () => {
-  //     const customAndProduktAttributes = aggregationsToCustomFilter(
-  //       Config.productAttributes,
-  //       aggregations
-  //     );
-
-  //     const constomAndMaterialAttributes = aggregationsToCustomFilter(
-  //       Config.materialAttributes,
-  //       aggregations
-  //     );
-
-  //     const customOrStyleAttributes = aggregationsToCustomFilter(
-  //       Config.andAttributes,
-  //       aggregations
-  //     );
-
-  //     // const customExcludeFilterBlock = aggregationsToCustomFilter(
-  //     //   Config.andAttributes,
-  //     //   excludes
-  //     // );
-
-  //     // const customVariantAndFilterBlock = aggregationsToCustomFilter(
-  //     //   Config.variantAndAttributes,
-  //     //   aggregations
-  //     // );
-
-  //     return {
-  //       and: [
-  //         ...Config.defaultFilter,
-  //         ...customAndProduktAttributes,
-  //         ...constomAndMaterialAttributes,
-  //       ],
-  //       or: [...customOrStyleAttributes],
-  //       not: [],
-  //     };
-  //   };
-
-  //   /**
-  //    *
-  //    * @param name
-  //    * @param body
-  //    * @param productFilter
-  //    * @param variantFilter
-  //    * @returns {Promise<*>}
-  //    */
-  //   async function doRequest(name, body, productFilter, variantFilter) {
-  //     return await httpClient.post(
-  //       {
-  //         ...body,
-  //         customFilter: {
-  //           "makaira-productgroup": { ...productFilter }, //? Hier sind die Filter drin
-  //           "makaira-product": { ...variantFilter },
-  //         },
-  //       },
-  //       name
-  //     );
-  //   }
-
-  //   /**
-  //    * We do multiple requests to fetch several result lists
-  //    * 1. products match all filters and size
-  //    * 2. products match the attributes (question 2) and size
-  //    * 3. products match material (question 3) and size
-  //    * 4. products are beach fashion products
-  //    * @returns {Promise<void>}
-  //    */
-  //   async function fetchResults() {
-  //     const sizeAttribute = Config.variantAndAttributes.find(
-  //       (item) => item.name === "mak_bh_size"
-  //     );
-
-  //     const sizeBlock = {
-  //       attribute: sizeAttribute.id,
-  //       operator: "eq",
-  //       value: [],
-  //     };
-
-  //     sizeConfigurations.forEach((size) => {
-  //       size.filterSizes.forEach((filterSize) =>
-  //         sizeBlock.value.push(filterSize)
-  //       );
-  //     });
-
-  //     // 1. Result
-  //     // Products that match filter and size
-  //     const productFilter = getCustomFiltersForResults();
-  //     const variantFilter = {
-  //       and: [
-  //         {
-  //           field: "stock",
-  //           operator: "gt",
-  //           value: 0,
-  //         },
-  //       ],
-  //     };
-
-  //     if (hasSelectedSizes) {
-  //       variantFilter.and.push(sizeBlock);
-  //     }
-
-  //     const response = await doRequest(
-  //       "1. Result",
-  //       body,
-  //       productFilter,
-  //       variantFilter
-  //     );
-
-  //     setNewResults(response, results, setResults);
-
-  //     // To save bandwidth we can skip fetching result 2. and 3. sometimes
-  //     if (showResults && hasSelectedSizes) {
-  //       if (isOneSelected()) {
-  //         function modifyObjectRecom(obj) {
-  //           let modifiedObjectRecom = JSON.parse(JSON.stringify(obj));
-
-  //           modifiedObjectRecom.and.forEach((item, index) => {
-  //             if (item.value.includes("Top Recommended")) {
-  //               item.value = ["Not Recommended"];
-  //               modifiedObjectRecom.not.push(item);
-  //               delete modifiedObjectRecom.and[index];
-  //             }
-  //           });
-
-  //           modifiedObjectRecom.and = modifiedObjectRecom.and.filter(Boolean);
-
-  //           return modifiedObjectRecom;
-  //         }
-
-  //         let modifyObjectRecommended = modifyObjectRecom(productFilter);
-
-  //         const recommendedFilter = modifyObjectRecommended;
-
-  //         const newAttributeResults = await doRequest(
-  //           "4. RECOMMENDED",
-  //           { ...body, offset: (attributesResultsPage - 1) * Config.pageSize },
-  //           recommendedFilter,
-  //           variantFilter
-  //         );
-
-  //         setNewResults(
-  //           newAttributeResults,
-  //           attributeResults,
-  //           setAttributeResults
-  //         );
-  //       }
-
-  //       //! 4. Not Recommended
-  //       //! Funktion zum Ändern der Werte
-  //       function modifyObjectNot(obj) {
-  //         let modifiedObject = JSON.parse(JSON.stringify(obj)); // Kopiere das ursprüngliche Objekt
-
-  //         modifiedObject.and.forEach((item, index) => {
-  //           if (!item.value.includes("bra")) {
-  //             if (item.value.includes("Top Recommended")) {
-  //               item.value = ["Not Recommended"];
-  //               modifiedObject.or.push(item); // Füge das modifizierte Objekt dem 'or'-Array hinzu
-  //               delete modifiedObject.and[index]; // Lösche den Eintrag aus dem 'and'-Array
-  //             } else {
-  //               modifiedObject.not.push(item); // Füge das modifizierte Objekt dem 'not'-Array hinzu
-  //               delete modifiedObject.and[index]; // Lösche den Eintrag aus dem 'and'-Array
-  //             }
-  //           }
-  //         });
-
-  //         modifiedObject.and = modifiedObject.and.filter(Boolean); // Entferne leere Einträge
-
-  //         let modifiedObjectTwo = JSON.parse(JSON.stringify(modifiedObject));
-
-  //         modifiedObjectTwo.or.forEach((item, index) => {
-  //           if (!item.value.includes("Not Recommended")) {
-  //             modifiedObjectTwo.and.push(item); // Füge das modifizierte Objekt dem 'and'-Array hinzu
-  //             delete modifiedObjectTwo.or[index]; // Lösche den Eintrag aus dem 'or'-Array
-  //           }
-  //         });
-
-  //         modifiedObjectTwo.or = modifiedObjectTwo.or.filter(Boolean); // Entferne leere Einträge
-
-  //         return modifiedObjectTwo;
-  //       }
-
-  //       // Aufruf der Funktion
-  //       let modifiedObjectNotRe = modifyObjectNot(productFilter);
-
-  //       // Ausgabe des modifizierten Objekts
-  //       // console.log(JSON.stringify(modifiedObjectNotRe, null, 2));
-  //       const notRecommendedFilter = modifiedObjectNotRe;
-
-  //       if (notRecommendedFilter.or.length > 0) {
-  //         const notRecommended = await doRequest(
-  //           "5. NOT RECOMMENDED",
-  //           { ...body, offset: (notRecommendedPage - 1) * Config.pageSize },
-  //           notRecommendedFilter,
-  //           variantFilter
-  //         );
-
-  //         setNewResults(
-  //           notRecommended,
-  //           notRecommendedResults,
-  //           setNotRecommendedResults
-  //         );
-  //       }
-  //     }
-  //   }
-
-  //   fetchResults();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [
-  //   visibleQuestions,
-  //   notRecommendedPage,
-  //   resultsPage,
-  //   attributesResultsPage,
-  //   showResults,
-  // ]);
-
-  /**
-   * Scroll to current visible question
-   */
-  // useEffect(() => {
-  //   scroller.scrollTo(
-  //     visibleQuestions[visibleQuestions.length - 1],
-  //     scrollOptions
-  //   );
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [visibleQuestions]);
-
-  /**
-   *
-   */
-  // useEffect(() => {
-  //   if (showResults) {
-  //     scroller.scrollTo("results", scrollOptions);
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [showResults]);
-
-  /**
-   *
-   */
-  // useEffect(() => {
-  //   if (visibleQuestions.includes("size2") && !hasSelectedSizes) {
-  //     setShowTwoSizeSelectors(true);
-  //   }
-  // }, [visibleQuestions, hasSelectedSizes]);
 
   const isOneSelected = () => {
     const isselectedOptions = selectedOptions.some((item) =>
@@ -823,6 +648,9 @@ function BHFinder() {
   const updateVisibleQuestions = (nextQuestion) => {
     if(step1 === undefined && nextQuestion !== "size") {
       getArticels();
+      setStep(step + 1)
+    } else {
+      filterArticle(step)
     }
 
     if (!nextQuestion) {
@@ -975,7 +803,7 @@ function BHFinder() {
         setActiveSizeConfig={setActiveSizeConfig}
       />
       <ActionInfoBar
-        total={results?.total || 0}
+        total={count}
         visibleQuestions={visibleQuestions}
         updateVisibleQuestions={updateVisibleQuestions}
         hasSelectedSize={hasSelectedSizes}

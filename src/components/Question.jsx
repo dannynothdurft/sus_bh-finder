@@ -13,7 +13,6 @@ function Question(props) {
     step,
     totalSteps,
     isVisible,
-    sizes,
     results,
     isAnswered = false,
     changeConfiguration,
@@ -40,7 +39,7 @@ function Question(props) {
   return (
     <AnimateHeight
       duration={0}
-      height={"auto"} // see props documentation below
+      height={"auto"}
     >
       <div id={question.id} className={`bh-finder__questionWrapper`}>
         {step !== 1 && (
