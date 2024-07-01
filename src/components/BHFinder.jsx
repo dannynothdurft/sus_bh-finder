@@ -159,6 +159,8 @@ function BHFinder() {
                   node {
                     ... on Product {
                       title
+                      handle
+                      id
                       priceRange{
                           minVariantPrice{
                               amount
@@ -279,63 +281,138 @@ function BHFinder() {
     }
   };
 
-  const filterArticle = (step) => {
-    console.log(step1)
-    console.log(step2)
-    
-    //! Es werden noch Artikel Doppelt gefiltert
+  const filterArticle = (step, nextQuestion) => {
+
     if(step === 2) {
-      const filteredOne = step1.map((art) => {
-        return art.node.metafields.map((meta) => {
+      const filteredOne = step1.flatMap((art) => {
+        return art.node.metafields.flatMap((meta) => {
           if (meta !== null) {
-            return selectedOptions[step - 1].options.map((opt) => {
+            return selectedOptions[step - 1].options.flatMap((opt) => {
               if (opt.status === "active") {
-                return opt.filters.map((filterName) => {
+                return opt.filters.flatMap((filterName) => {
                   if (filterName.name === meta.key && filterName.value === meta.value) {
-                    return art;
+                    if (opt.excludes.length > 0) {
+                      const exclusionResult = opt.excludes.some((exc) => exc.name === meta.key && exc.value === meta.value);
+                      if (exclusionResult) {
+                        return [];
+                      }
+                      return [art];
+                    }
+                    return [art];
                   }
-                  return null;
-                }).filter(Boolean);
+                  return [];
+                });
               }
-              return null;
-            }).flat().filter(Boolean);
+              return [];
+            });
           }
-          return null;
-        }).flat().filter(Boolean);
-      }).flat().filter(Boolean);
+          return [];
+        });
+      });
+
+      const uniqueProducts = filteredOne.filter((product, index, self) => 
+        index === self.findIndex((t) => (
+          t.node.title === product.node.title
+        ))
+      );
       
-      dispatch(incrementStep2(filteredOne))
+      dispatch(incrementStep2(uniqueProducts))
       setStep(3);
-      setCount(filteredOne.length)
+      setCount(uniqueProducts.length)
+
+      if(nextQuestion === false) {
+        setResults(uniqueProducts)
+      }
     }
 
     if(step === 3) {
-      const filteredSecond = step2.map((art) => {
-        return art.node.metafields.map((meta) => {
+      const filteredSecond = step2.flatMap((art) => {
+        return art.node.metafields.flatMap((meta) => {
           if (meta !== null) {
-            return selectedOptions[step - 1].options.map((opt) => {
-              console.log(opt)
+            return selectedOptions[step - 1].options.flatMap((opt) => {
               if (opt.status === "active") {
-                return opt.filters.map((filterName) => {
+                return opt.filters.flatMap((filterName) => {
                   if (filterName.name === meta.key && filterName.value === meta.value) {
-                    return art;
+                    if (opt.excludes.length > 0) {
+                      const exclusionResult = opt.excludes.some((exc) => exc.name === meta.key && exc.value === meta.value);
+                      if (exclusionResult) {
+                        return [];
+                      }
+                      return [art];
+                    }
+                    return [art];
                   }
-                  return null;
-                }).filter(Boolean);
+                  return [];
+                });
               }
-              return null;
-            }).flat().filter(Boolean);
+              return [];
+            });
           }
-          return null;
-        }).flat().filter(Boolean);
-      }).flat().filter(Boolean);
+          return [];
+        });
+      });
       
-      console.log(filteredSecond)
-      dispatch(incrementStep3(filteredSecond))
+      const uniqueProducts = filteredSecond.filter((product, index, self) =>
+        index === self.findIndex((t) => (
+          t.node.title === product.node.title
+        ))
+      );
+      
+      dispatch(incrementStep3(uniqueProducts))
       setStep(4);
-      setCount(filteredSecond.length)
+      setCount(uniqueProducts.length)
+
+      if(nextQuestion === false) {
+        setResults(uniqueProducts)
+      }
+    }
+
+    if(step === 4) {
+      const filteredThird = step3.flatMap((art) => {
+        return art.node.metafields.flatMap((meta) => {
+          if (meta !== null) {
+            return selectedOptions[step - 1].options.flatMap((opt) => {
+              if (opt.status === "active") {
+                return opt.filters.flatMap((filterName) => {
+                  if (filterName.name === meta.key && filterName.value === meta.value) {
+                    if (opt.excludes.length > 0) {
+                      const exclusionResult = opt.excludes.some((exc) => exc.name === meta.key && exc.value === meta.value);
+                      if (exclusionResult) {
+                        return [];
+                      }
+                      return [art];
+                    }
+                    return [art];
+                  }
+                  return [];
+                });
+              }
+              return [];
+            });
+          }
+          return [];
+        });
+      });
+      
+      const uniqueProducts = filteredThird.filter((product, index, self) =>
+        index === self.findIndex((t) => (
+          t.node.title === product.node.title
+        ))
+      );
+      
+      dispatch(incrementStep3(uniqueProducts))
+      setStep(4);
+      setCount(uniqueProducts.length)
+
+      if(nextQuestion === false) {
+        setResults(uniqueProducts)
+      }
     }
   }
+
+  const resetFinder = () => {
+    window.location.reload();
+  };
 
   // Todo: Das muss alles bearbeitet werden!!  
   const [visibleQuestions, setVisibleQuestions] = useState(
@@ -650,7 +727,7 @@ function BHFinder() {
       getArticels();
       setStep(step + 1)
     } else {
-      filterArticle(step)
+      filterArticle(step, nextQuestion)
     }
 
     if (!nextQuestion) {
@@ -676,6 +753,15 @@ function BHFinder() {
    * This is triggered when a user clicks on the "Auswahl ändern" button
    */
   const changeConfiguration = (questionId) => {
+
+    selectedOptions.map((id, index) => {
+      if(id.id === questionId) {
+        return setStep(index + 1)
+      } else {
+        return null
+      }
+    })
+
     if ("final" !== questionId) {
       const questionConfig = Config.questions.find(
         (question) => question.id === questionId
@@ -707,10 +793,6 @@ function BHFinder() {
       }
     }
   };
-
-  // const resetFinder = () => {
-  //   changeConfiguration("size");
-  // };
 
   // if (
   //   attributeResults.items &&
@@ -813,7 +895,7 @@ function BHFinder() {
         setSizeConfigurations={setSizeConfigurations}
       />
 
-      {/*
+     
       {showResults && <RestartBar resetFinder={resetFinder} />}
       <ProductResults
         name="results"
@@ -825,6 +907,7 @@ function BHFinder() {
         sizeConfigurations={sizeConfigurations}
         currencySign={currencySign}
       />
+      {/* 
       {showResults && filterAttributeResults?.total > 0 && (
         <AdditionalProductResults
           name="attributeResults"

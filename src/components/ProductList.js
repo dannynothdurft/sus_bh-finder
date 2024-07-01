@@ -12,12 +12,7 @@ function ProductList({ products, paginate, currentPage, total, currencySign }) {
         <div className="list-container ">
           <div className="gridView">
             {products.map((item, index) => (
-              <Tile
-                key={item.id}
-                product={item}
-                position={index + 1}
-                currencySign={currencySign}
-              />
+              <Tile key={item.node.id} product={item} position={index + 1} />
             ))}
           </div>
         </div>

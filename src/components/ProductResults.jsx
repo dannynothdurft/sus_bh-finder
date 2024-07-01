@@ -18,7 +18,8 @@ function ProductResults({
 }) {
   if (!show) return <Element name={name} />;
 
-  const { items, total } = results;
+  const items = results;
+  const total = results.length
 
   const title = Config.results.title;
   const text =
@@ -123,7 +124,7 @@ function ProductResults({
 
         <ProductList
           products={items}
-          total={total}
+          total={results.length}
           currentPage={currentPage}
           paginate={(page) => {
             setPage(page);

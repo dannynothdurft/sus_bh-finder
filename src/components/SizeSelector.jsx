@@ -49,7 +49,6 @@ const groupedData = useMemo(() => {
   const [firstValuesList, setFirstValuesList] = useState(initialFirstValuesList);
 
   const updateBaseSize = (value) => {
-    console.info(value);
     setFirstValuesList(prevList =>
         prevList.map(item =>
           item.sus === value ? { ...item, isSelected: true, isActive: true } : { ...item, isSelected: false, isActive: false }
@@ -76,7 +75,6 @@ const groupedData = useMemo(() => {
 
 
       const updateSecondSize = (value) => {
-        console.info(value);
         setFullsizeList(prevList =>
             prevList.map(item =>
               item.sus === value ? { ...item, isSelected: true, isActive: true } : { ...item, isSelected: false, isActive: false }
