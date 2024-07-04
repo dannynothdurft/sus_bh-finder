@@ -21,7 +21,7 @@ if(sizes) {
   }, [sizes])
 
   return (
-    <div className="bh-finder__startInfo">
+    <div className="bh-finder__startInfo bg-black">
       <div className="bh-finder__startInfo-image-wrapper">
         <picture>
           <source media="(min-width: 720PX)" srcSet={`/img/${imageDesktop}`} />
