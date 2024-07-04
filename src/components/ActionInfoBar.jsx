@@ -37,6 +37,7 @@ function ActionInfoBar({
   }`;
 
   return (
+    hasSelectedSize ? 
     <div className="bh-finder__actionBar">
       {visibleQuestions.length > 1 && (
         <div className="bh-finder__actionBar--total">
@@ -66,7 +67,7 @@ function ActionInfoBar({
           __html: nextText,
         }}
       />
-    </div>
+    </div> : null
   );
 }
 

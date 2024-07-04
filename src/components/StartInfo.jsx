@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Config from "../lang/configDE";
+import { useSelector } from "react-redux";
 
 
 const StartInfo = ({
@@ -9,7 +10,15 @@ const StartInfo = ({
   imageMobile,
   imageDesktop,
 }) => {
-  const [finderIsEnabled, setFinderIsEnabled] = useState(false);
+  const { sizes } = useSelector((state) => state.sizes);
+
+  const [finderIsEnabled, setFinderIsEnabled] = useState(true);
+
+  useEffect(() => {
+if(sizes) {
+  setFinderIsEnabled(false)
+}
+  }, [sizes])
 
   return (
     <div className="bh-finder__startInfo">

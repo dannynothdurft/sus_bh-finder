@@ -284,6 +284,12 @@ function BHFinder() {
   const filterArticle = (step, nextQuestion) => {
 
     if(step === 2) {
+
+      const hasActiveStatus = selectedOptions[step - 1].options
+      .map(opt => opt.status)
+      .some(status => status === 'active');
+
+    if(hasActiveStatus) {
       const filteredOne = step1.flatMap((art) => {
         return art.node.metafields.flatMap((meta) => {
           if (meta !== null) {
@@ -323,9 +329,28 @@ function BHFinder() {
       if(nextQuestion === false) {
         setResults(uniqueProducts)
       }
+    } else {
+      dispatch(incrementStep2(step1))
+      setStep(3);
+      setCount(step1.length)
+
+      if(nextQuestion === false) {
+        setResults(step1)
+      }
+    }
+    
+
+      
     }
 
     if(step === 3) {
+
+      const hasActiveStatus = selectedOptions[step - 1].options
+      .map(opt => opt.status)
+      .some(status => status === 'active');
+
+    if(hasActiveStatus) {
+
       const filteredSecond = step2.flatMap((art) => {
         return art.node.metafields.flatMap((meta) => {
           if (meta !== null) {
@@ -365,9 +390,25 @@ function BHFinder() {
       if(nextQuestion === false) {
         setResults(uniqueProducts)
       }
+    } else {
+      dispatch(incrementStep3(step2))
+      setStep(4);
+      setCount(step2.length)
+
+      if(nextQuestion === false) {
+        setResults(step2)
+      }
+    }
     }
 
     if(step === 4) {
+
+      const hasActiveStatus = selectedOptions[step - 1].options
+      .map(opt => opt.status)
+      .some(status => status === 'active');
+
+    if(hasActiveStatus) {
+
       const filteredThird = step3.flatMap((art) => {
         return art.node.metafields.flatMap((meta) => {
           if (meta !== null) {
@@ -400,13 +441,22 @@ function BHFinder() {
         ))
       );
       
-      dispatch(incrementStep3(uniqueProducts))
+      dispatch(incrementStep4(uniqueProducts))
       setStep(4);
       setCount(uniqueProducts.length)
 
       if(nextQuestion === false) {
         setResults(uniqueProducts)
       }
+    } else {
+      dispatch(incrementStep4(step3))
+      setStep(4);
+      setCount(step3.length)
+
+      if(nextQuestion === false) {
+        setResults(step3)
+      }
+    }
     }
   }
 
@@ -521,18 +571,18 @@ function BHFinder() {
 
     // Hier sind einstellungen für die id "breastform" bis codezeile 581
     // Finde den Index des Objekts mit dem Titel
-    const stateBF = newState[1].options;
-
+    const stateBF = newState[2].options;
+    
     const athleticIndex = stateBF.findIndex(
-      (item) => item.title === "sportlich"
+      (item) => item.title === "Sportlich"
     );
 
     const tearDropIndex = stateBF.findIndex(
-      (item) => item.title === "tränenförmig"
+      (item) => item.title === "Tränenförmig"
     );
 
     const relaxedIndex = stateBF.findIndex(
-      (item) => item.title === "entspannt"
+      (item) => item.title === "Entspannt"
     );
 
     // Zählt die aktiven Selects
@@ -577,72 +627,72 @@ function BHFinder() {
       }
     }
 
-    if (optionTitle === "entspannt") {
+    if (optionTitle === "Entspannt") {
       if (relaxedIndex !== -1) {
-        if (newState[1].options[relaxedIndex].status === "active") {
+        if (newState[2].options[relaxedIndex].status === "active") {
           // Wenn "entspannt" aktiv ist, setze "sportlich" auf "inaktive"
-          newState[1].options.find(
-            (item) => item.title === "sportlich"
+          newState[2].options.find(
+            (item) => item.title === "Sportlich"
           ).status = "inactive";
-          newState[1].options.find(
-            (item) => item.title === "tränenförmig"
+          newState[2].options.find(
+            (item) => item.title === "Tränenförmig"
           ).status = "inactive";
         }
       }
     }
 
-    if (optionTitle === "tränenförmig") {
+    if (optionTitle === "Tränenförmig") {
       if (tearDropIndex !== -1) {
-        if (newState[1].options[tearDropIndex].status === "active") {
+        if (newState[2].options[tearDropIndex].status === "active") {
           // Wenn "entspannt" aktiv ist, setze "sportlich" auf "inactive"
-          newState[1].options.find(
-            (item) => item.title === "entspannt"
+          newState[2].options.find(
+            (item) => item.title === "Entspannt"
           ).status = "inactive";
         }
       }
       if (athleticIndex !== -1) {
-        if (newState[1].options[athleticIndex].status === "active") {
+        if (newState[2].options[athleticIndex].status === "active") {
           // Wenn "entspannt" aktiv ist, setze "sportlich" auf "inactive"
-          newState[1].options.find(
-            (item) => item.title === "entspannt"
+          newState[2].options.find(
+            (item) => item.title === "Entspannt"
           ).status = "inactive";
         }
       }
     }
 
-    if (optionTitle === "sportlich") {
+    if (optionTitle === "Sportlich") {
       if (athleticIndex !== -1) {
-        if (newState[1].options[athleticIndex].status === "active") {
+        if (newState[2].options[athleticIndex].status === "active") {
           // Wenn "sportlich" aktiv ist, setze "entspannt" auf "inactive"
-          newState[1].options.find(
-            (item) => item.title === "entspannt"
+          newState[2].options.find(
+            (item) => item.title === "Entspannt"
           ).status = "inactive";
         }
       }
       if (tearDropIndex !== -1) {
-        if (newState[1].options[tearDropIndex].status === "active") {
+        if (newState[2].options[tearDropIndex].status === "active") {
           // Wenn "entspannt" aktiv ist, setze "sportlich" auf "inactive"
-          newState[1].options.find(
-            (item) => item.title === "entspannt"
+          newState[2].options.find(
+            (item) => item.title === "Entspannt"
           ).status = "inactive";
         }
       }
     }
 
-    if (optionTitle === "asymmetrisch") {
+    if (optionTitle === "Asymmetrisch") {
       if (tearDropIndex !== -1) {
-        if (newState[1].options[tearDropIndex].status === "active") {
+        if (newState[2].options[tearDropIndex].status === "active") {
           // Wenn "entspannt" aktiv ist, setze "sportlich" auf "inactive"
-          newState[1].options.find(
-            (item) => item.title === "entspannt"
+          newState[2].options.find(
+            (item) => item.title === "Entspannt"
           ).status = "inactive";
         }
       }
       if (athleticIndex !== -1) {
-        if (newState[1].options[athleticIndex].status === "active") {
+        if (newState[2].options[athleticIndex].status === "active") {
           // Wenn "entspannt" aktiv ist, setze "sportlich" auf "inactive"
-          newState[1].options.find(
-            (item) => item.title === "entspannt"
+          newState[2].options.find(
+            (item) => item.title === "Entspannt"
           ).status = "inactive";
         }
       }
@@ -650,18 +700,18 @@ function BHFinder() {
 
     if (optionTitle === "Ost-West") {
       if (tearDropIndex !== -1) {
-        if (newState[1].options[tearDropIndex].status === "active") {
+        if (newState[2].options[tearDropIndex].status === "active") {
           // Wenn "entspannt" aktiv ist, setze "sportlich" auf "inactive"
-          newState[1].options.find(
-            (item) => item.title === "entspannt"
+          newState[2].options.find(
+            (item) => item.title === "Entspannt"
           ).status = "inactive";
         }
       }
       if (athleticIndex !== -1) {
-        if (newState[1].options[athleticIndex].status === "active") {
+        if (newState[2].options[athleticIndex].status === "active") {
           // Wenn "entspannt" aktiv ist, setze "sportlich" auf "inactive"
-          newState[1].options.find(
-            (item) => item.title === "entspannt"
+          newState[2].options.find(
+            (item) => item.title === "Entspannt"
           ).status = "inactive";
         }
       }
@@ -669,17 +719,18 @@ function BHFinder() {
 
     // Hier sind einstellungen für die id "breasttissuetype" bis codezeile ###
     // Finde den Index des Objekts mit dem Titel
-    const stateBTT = newState[2].options;
+    const stateBTT = newState[3].options;
 
     const softIndex = stateBTT.findIndex((item) => item.title === "Weich");
 
     const firmIndex = stateBTT.findIndex((item) => item.title === "Fest");
 
+
     if (optionTitle === "Weich") {
       if (softIndex !== -1) {
-        if (newState[2].options[softIndex].status === "active") {
+        if (newState[3].options[softIndex].status === "active") {
           // Wenn "Weich" aktiv ist, setze "Fest" auf "inactive"
-          newState[2].options.find((item) => item.title === "Fest").status =
+          newState[3].options.find((item) => item.title === "Fest").status =
             "inactive";
         }
       }
@@ -687,16 +738,16 @@ function BHFinder() {
 
     if (optionTitle === "Mittel") {
       if (softIndex !== -1) {
-        if (newState[2].options[softIndex].status === "active") {
+        if (newState[3].options[softIndex].status === "active") {
           // Wenn "Weich" aktiv ist, setze "Fest" auf "inactive"
-          newState[2].options.find((item) => item.title === "Fest").status =
+          newState[3].options.find((item) => item.title === "Fest").status =
             "inactive";
         }
       }
       if (firmIndex !== -1) {
-        if (newState[2].options[firmIndex].status === "active") {
-          // Wenn "entspannt" aktiv ist, setze "sportlich" auf "inactive"
-          newState[2].options.find((item) => item.title === "Weich").status =
+        if (newState[3].options[firmIndex].status === "active") {
+          // Wenn "Fest" aktiv ist, setze "weich" auf "inactive"
+          newState[3].options.find((item) => item.title === "Weich").status =
             "inactive";
         }
       }
@@ -704,9 +755,9 @@ function BHFinder() {
 
     if (optionTitle === "Fest") {
       if (firmIndex !== -1) {
-        if (newState[2].options[firmIndex].status === "active") {
+        if (newState[3].options[firmIndex].status === "active") {
           // Wenn "entspannt" aktiv ist, setze "sportlich" auf "inactive"
-          newState[2].options.find((item) => item.title === "Weich").status =
+          newState[3].options.find((item) => item.title === "Weich").status =
             "inactive";
         }
       }

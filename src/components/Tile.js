@@ -3,7 +3,6 @@ import React, { useState } from "react";
 function Tile({ product, position }) {
   const isSale = false;
   const [imgSrc, setImgSrc] = useState(product.node.images.nodes[0].url);
-  console.log(imgSrc);
 
   return (
     <div className="productData productData col-xxs col-xs-4 col-sm-3 col-md-3 productBox">
