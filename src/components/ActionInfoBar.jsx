@@ -32,7 +32,7 @@ function ActionInfoBar({
     hasSelectedSize
   );
 
-  const buttonClasses = `bh-finder__next  bh-finder__next--stretch btn btn-primary-dark ${
+  const buttonClasses = `bh-finder__next  bh-finder__next--stretch bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow ${
     !next || visibleQuestions.length === 1 ? "bh-finder__next--right" : ""
   }`;
 
@@ -52,7 +52,7 @@ function ActionInfoBar({
         <div className="bh-finder__resultLinkWrapper">
           <button
             step={next}
-            className="btn btn-link bh-finder__resultLink"
+            className="bh-finder__resultLink text-gray-800 font-semibold"
             onClick={() => updateVisibleQuestions()}
             dangerouslySetInnerHTML={{
               __html: Config.quickResultsButtonText,

@@ -21,7 +21,7 @@ if(sizes) {
   }, [sizes])
 
   return (
-    <div className="bh-finder__startInfo bg-black">
+    <div className="bh-finder__startInfo">
       <div className="bh-finder__startInfo-image-wrapper">
         <picture>
           <source media="(min-width: 720PX)" srcSet={`/img/${imageDesktop}`} />
@@ -36,7 +36,7 @@ if(sizes) {
         <p className="bh-finder__welcomeText">{Config.welcomeText}</p>
         <button
           bhf-ga4-tid="start_button"
-          className="bh-finder__start bh-finder__next btn btn-primary-dark"
+          className="bh-finder__start bh-finder__next bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
           onClick={() => {
             if (!visibleQuestions.length) {
               updateVisibleQuestions(QuestionToShow);
