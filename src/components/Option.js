@@ -56,7 +56,7 @@ function Option({
                 ? "bh-finder__optionImage-big"
                 : "bh-finder__optionImage"
             }
-            src={`${window.location.origin}/out/sugarshape/img/bh-finder/${option.image}`}
+            src={`/img/${option.image}`}
           />
         ) : null
       ) : (

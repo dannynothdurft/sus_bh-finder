@@ -71,7 +71,6 @@ function Question(props) {
         )}
         {question.optionsType === "size" ? (
           <SizeSelector
-          //startSizes={sizes} 
           {...props} isAnswered={isAnswered} />
         ) : (
           <ul
