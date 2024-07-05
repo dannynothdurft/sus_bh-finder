@@ -15,7 +15,6 @@ $mobile: "only screen and (min-width: 375px)";
   }
 }
 
-.bh-finder__questionWrapper,
 .bh-finder__productListWrapper {
   margin: 0 auto;
   padding: 8px 15px;
@@ -30,49 +29,12 @@ $mobile: "only screen and (min-width: 375px)";
   visibility: hidden;
 }
 
-.bh-finder__question {
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-
-  @media #{$mobile} {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  @media #{$mobileMax} {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  @media #{$tablet} {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  @media #{$desktop} {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-
-  &--disabled {
-    opacity: 0.3;
-    pointer-events: none;
-  }
-}
-
 .bh-finder__question-edit {
   text-align: right;
 }
 
-.bh-finder__questionText {
-  font-size: 1em;
-  margin-top: 8px;
-}
-
 .small-text {
   font-size: 1.2rem;
-}
-
-.bh-finder__questionText--bold {
-  font-weight: bold;
 }
 
 .bh-finder__selection {
@@ -120,14 +82,6 @@ $mobile: "only screen and (min-width: 375px)";
 
 .bh-finder__selectionText {
   margin: 0;
-}
-
-.bh-finder__indicator {
-  color: #fff;
-  background: #4d4b50;
-  border-radius: 2px;
-  padding: 4px 8px;
-  font-size: 0.8em;
 }
 
 .bh-finder__next {
@@ -420,31 +374,6 @@ $mobile: "only screen and (min-width: 375px)";
 
 .bh-finder__sizeLink--bold {
   font-weight: bold;
-}
-
-.bh-finder__trenner {
-  opacity: 0.2;
-
-  i {
-    border-color: #f7f7f7;
-    background: #f7f7f7;
-  }
-}
-
-.trenner.bh-finder__trenner > span:after {
-  width: 100%;
-}
-
-@media (max-width: 470px) {
-  .trenner.bh-finder__trenner > span:after {
-    width: 100%;
-  }
-}
-
-.bh-finder__sizeInfoTextWrapper {
-  padding: 8px;
-  background: white;
-  margin-bottom: 16px;
 }
 
 .bh-finder__sizeInfoText {

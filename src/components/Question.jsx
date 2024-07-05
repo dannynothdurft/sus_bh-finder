@@ -41,31 +41,31 @@ function Question(props) {
       duration={0}
       height={"auto"}
     >
-      <div id={question.id} className={`bh-finder__questionWrapper`}>
+      <div id={question.id} className="mx-auto p-2.5 bg-[#f7f7f7]">
         {step !== 1 && (
-          <div className="trenner trenner_cms bh-finder__trenner">
+          <div className="trenner trenner_cms opacity-20">
             <span>
-              <i className="fa fa-heart" />
+              <i className="fa fa-heart border-[#f7f7f7] bg-[#f7f7f7]" />
             </span>
           </div>
         )}
 
         {step <= totalSteps && (
-          <span className="bh-finder__indicator">{`${step} von ${totalSteps}`}</span>
+          <span className="text-white bg-[#4d4b50] rounded-[2px] py-1 px-2 text-[0.8em]">{`${step} von ${totalSteps}`}</span>
         )}
         {question.preText && (
           <div
-            className="bh-finder__questionText"
+            className="text-[1em] mt-2"
             dangerouslySetInnerHTML={{ __html: question.preText }}
           />
         )}
         <p
-          className="bh-finder__questionText bh-finder__questionText--bold"
+          className="text-[1em] mt-2 font-bold"
           dangerouslySetInnerHTML={{ __html: question.text }}
         />
         {question.infoText && (
           <div
-            className="bh-finder__questionText mb-2"
+            className="text-[1em] mt-2 mb-2"
             dangerouslySetInnerHTML={{ __html: question.infoText }}
           />
         )}
@@ -75,9 +75,7 @@ function Question(props) {
           {...props} isAnswered={isAnswered} />
         ) : (
           <ul
-            className={`bh-finder__question ${
-              isAnswered ? "bh-finder__question--disabled" : ""
-            }`}
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2"
           >
             {options.map((option) => {
               const optionStatus = selectedOptions.find(

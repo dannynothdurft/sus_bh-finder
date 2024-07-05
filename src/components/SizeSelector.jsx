@@ -86,14 +86,14 @@ const groupedData = useMemo(() => {
   return (
     <>
       {showInfo && (
-        <div className="bh-finder__sizeInfoTextWrapper">
+        <div className="p-2 bg-white mb-4">
           <button
             onClick={() => setShowInfo(false)}
             className="bh-finder__closeIcon"
           >
             <i className="fa fa-times-circle" />
           </button>
-          <p className="bh-finder__sizeInfoText">
+          <p className="py-2">
             {question.sizeInfoText(() => {
               setShowCalculator(true);
               scroller.scrollTo(`sizeCalculator-${question.id}`, scrollOptions);
