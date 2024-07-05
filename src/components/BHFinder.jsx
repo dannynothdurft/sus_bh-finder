@@ -40,7 +40,7 @@ function BHFinder() {
   const [selectedOptions, setSelectedOptions] = useState(getInitIalOptions());
   const [step, setStep] = useState(1);
   const [count, setCount] = useState(0);
-  const { step1, step2, step3, step4 } = useSelector((state) => state.steps);
+  const { step1, step2, step3 } = useSelector((state) => state.steps);
   const { sizes } = useSelector((state) => state.sizes);
   const { filterSize } = useSelector((state) => state.filter);
   const hasSelectedSizes = filterSize ? true : false;
@@ -275,6 +275,13 @@ function BHFinder() {
       const result = await response.json();
       dispatch(incrementStep1(result.data.search.edges));
       setCount(result.data.search.totalCount);
+
+      scroller.scrollTo('attributes', {
+        duration: 400,
+        delay: 0,
+        smooth: 'easeInOutQuart'
+      });
+
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -328,18 +335,33 @@ function BHFinder() {
       if(nextQuestion === false) {
         setResults(uniqueProducts)
       }
+
+      setTimeout(() => {
+        scroller.scrollTo('breastform', {
+          duration: 400,
+          delay: 0,
+          smooth: 'easeInOutQuart'
+        });
+      }, 1);
+
     } else {
       dispatch(incrementStep2(step1))
       setStep(3);
       setCount(step1.length)
 
+
       if(nextQuestion === false) {
         setResults(step1)
       }
-    }
-    
 
-      
+      setTimeout(() => {
+        scroller.scrollTo('breastform', {
+          duration: 400,
+          delay: 0,
+          smooth: 'easeInOutQuart'
+        });
+      }, 1);
+    }
     }
 
     if(step === 3) {
@@ -389,6 +411,15 @@ function BHFinder() {
       if(nextQuestion === false) {
         setResults(uniqueProducts)
       }
+
+      setTimeout(() => {
+        scroller.scrollTo('breasttissuetype', {
+          duration: 400,
+          delay: 0,
+          smooth: 'easeInOutQuart'
+        });
+      }, 1);
+
     } else {
       dispatch(incrementStep3(step2))
       setStep(4);
@@ -397,6 +428,13 @@ function BHFinder() {
       if(nextQuestion === false) {
         setResults(step2)
       }
+      setTimeout(() => {
+        scroller.scrollTo('breasttissuetype', {
+          duration: 400,
+          delay: 0,
+          smooth: 'easeInOutQuart'
+        });
+      }, 1);
     }
     }
 
@@ -447,6 +485,14 @@ function BHFinder() {
       if(nextQuestion === false) {
         setResults(uniqueProducts)
       }
+
+      setTimeout(() => {
+        scroller.scrollTo('results', {
+          duration: 400,
+          delay: 0,
+          smooth: 'easeInOutQuart'
+        });
+      }, 1);
     } else {
       dispatch(incrementStep4(step3))
       setStep(4);
@@ -455,6 +501,14 @@ function BHFinder() {
       if(nextQuestion === false) {
         setResults(step3)
       }
+
+      setTimeout(() => {
+        scroller.scrollTo('results', {
+          duration: 400,
+          delay: 0,
+          smooth: 'easeInOutQuart'
+        });
+      }, 1);
     }
     }
   }
@@ -842,6 +896,15 @@ function BHFinder() {
         setShowResults(false);
       }
     }
+
+    setTimeout(() => {
+      scroller.scrollTo(questionId, {
+        duration: 400,
+        delay: 0,
+        smooth: 'easeInOutQuart'
+      });
+    }, 1);
+
   };
 
   // if (

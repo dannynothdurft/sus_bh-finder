@@ -325,55 +325,6 @@ const configDE = {
         },
       ],
     },
-    {
-      id: "size2",
-      title: "",
-      preText:
-        "<p>Wähle Deine BH-Größe aus, damit wir Dir passende Empfehlungen anzeigen können.</p>",
-      text: "Deine SugarShape Größe: Perfekte Passform durch neues Größensystem.",
-      optionsType: "size",
-      before: ["size", "attributes", "breastform", "breasttissuetype"],
-      next: null,
-      following: [""],
-      display: (size) => {
-        return !size;
-      },
-      show: false,
-      options: [],
-      sizeStepText: (susType) => {
-        if (susType)
-          return [
-            "1. Wähle Deinen Unterbrustumfang (in cm).",
-            "2. Wähle Deine SugarShape Größe: Unterbrustumfang/Brustumfang in cm z.B. 80/100.",
-          ];
-        return ["1. Wähle Dein Unterbrustband ", "2. Wähle Deine BH-Größe"];
-      },
-      sizeInfoText: (toggleCalculator) => (
-        <>
-          Du willst einen <strong>perfekt sitzenden BH</strong>? Dann nutze
-          unsere{" "}
-          <button onClick={toggleCalculator} className="bh-finder__linkButton">
-            Anleitung
-          </button>{" "}
-          und miss Dich aus, um Deine SugarShape-Größe in 2 Schritten zu
-          ermitteln. Alternativ kannst Du auch Deine Standard-BH-Größe
-          auswählen. Aber bitte beachte, dass BH-Größen verschiedener Hersteller
-          unterschiedlich ausfallen können. Bei Fragen hilft Dir unser{" "}
-          <a
-            target="_blank"
-            href="/persoenliche-Beratung/"
-            className="underline"
-          >
-            Kundenservice
-          </a>{" "}
-          gerne weiter.
-        </>
-      ),
-      sizeTypeButtonText: (isSusSizeType) =>
-        isSusSizeType ? "Standardgröße wählen" : "SugarShape Größe wählen",
-      sizeCalculatorText: (visible) =>
-        visible ? "Größenrechner ausblenden" : "Zum Größenrechner",
-    },
   ],
 };
 
