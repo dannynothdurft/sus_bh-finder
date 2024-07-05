@@ -875,7 +875,7 @@ function BHFinder() {
   // }
 
   return (
-    <div className="sus--bh-finder">
+    <div className="max-w-[1170px] mx-auto">
       <StartInfo
         visibleQuestions={visibleQuestions}
         updateVisibleQuestions={updateVisibleQuestions}

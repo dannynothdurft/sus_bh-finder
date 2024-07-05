@@ -3,11 +3,6 @@ $tablet: "only screen and (min-width: 720px)";
 $mobileMax: "only screen and (min-width: 470px)";
 $mobile: "only screen and (min-width: 375px)";
 
-.sus--bh-finder {
-  max-width: 1170px;
-  margin: 0 auto;
-}
-
 .cmsContent--bh-finder {
   > .dd-ve-container {
     @media (max-width: 719px) {
@@ -17,83 +12,6 @@ $mobile: "only screen and (min-width: 375px)";
 
   .trenner > span::after {
     width: 100%;
-  }
-}
-
-.bh-finder__startInfo {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: #f7f7f7;
-
-  .bh-finder__startInfo-image-wrapper {
-    width: 100%;
-    position: relative;
-
-    img {
-      width: 100%;
-    }
-
-    h1 {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      margin: 0;
-      color: #ffffff;
-      font-size: 39px;
-      width: 100%;
-      background: rgba(77, 75, 80, 0.5);
-      text-align: center;
-      padding: 8px 0;
-    }
-
-    @media #{$tablet} {
-      width: 65%;
-
-      h1 {
-        display: none;
-      }
-    }
-  }
-
-  .startInfo__content {
-    width: 100%;
-    padding: 8px 15px;
-
-    h1 {
-      display: none;
-    }
-
-    .bh-finder__next {
-      width: 100%;
-    }
-
-    @media #{$tablet} {
-      width: 35%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-
-      h1 {
-        display: inline-block;
-        text-align: center;
-      }
-
-      h1,
-      .bh-finder__welcomeText {
-        margin-bottom: 1rem;
-      }
-    }
-
-    @media #{$desktop} {
-      h1,
-      .bh-finder__welcomeText {
-        margin-bottom: 3rem;
-      }
-    }
-  }
-
-  @media #{$tablet} {
-    flex-wrap: nowrap;
   }
 }
 

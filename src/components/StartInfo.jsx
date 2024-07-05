@@ -21,22 +21,22 @@ if(sizes) {
   }, [sizes])
 
   return (
-    <div className="bh-finder__startInfo">
-      <div className="bh-finder__startInfo-image-wrapper">
+    <div className="flex flex-wrap bg-[#f7f7f7] md:flex-nowrap">
+      <div className="relative w-full md:w-[65%]">
         <picture>
           <source media="(min-width: 720PX)" srcSet={`/img/${imageDesktop}`} />
           <source srcSet={`/img/${imageMobile}`} />
-          <img src={`/img/${imageMobile}`} alt="hier muss noch was hin" />
+          <img src={`/img/${imageMobile}`} alt="hier muss noch was hin" className="w-full"/>
         </picture>
-        <h1>{Config.title}</h1>
+        <h1 className="absolute left-0 bottom-0 m-0 w-full text-white text-[39px] bg-[rgba(77,75,80,0.5)] text-center p-2 md:hidden">{Config.title}</h1>
       </div>
 
-      <div className="startInfo__content">
-        <h1>{Config.title}</h1>
-        <p className="bh-finder__welcomeText">{Config.welcomeText}</p>
+      <div className="w-full p-5 md:w-[35%] md:flex md:flex-col md:justify-center">
+        <h1 className="hidden md:inline-block md:text-center mb-4 text-[30px] lg:text-[39px]">{Config.title}</h1>
+        <p className="mb-5 lg:mb-12">{Config.welcomeText}</p>
         <button
           bhf-ga4-tid="start_button"
-          className="bh-finder__start bh-finder__next bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+          className="w-full bg-[#333] border-[#333] hover:bg-[#999] text-white font-semibold py-2 px-4 border hover:border-[#999] rounded shadow"
           onClick={() => {
             if (!visibleQuestions.length) {
               updateVisibleQuestions(QuestionToShow);
