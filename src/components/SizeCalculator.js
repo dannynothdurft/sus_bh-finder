@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const SizeInput = ({ value = "", placeholder = "", onChange }) => (
   <input
-    className="bh-finder__sizeCalculatorInput"
+    className="block w-full bg-white border border-gray-300 py-2 px-4 my-2"
     type="number"
     min="50"
     max="200"
@@ -14,13 +14,27 @@ const SizeInput = ({ value = "", placeholder = "", onChange }) => (
 );
 
 const SizeTip = ({ image = "", title = "", list = [] }) => (
-  <div className="bh-finder__sizeCalculatorTip">
-    <img src={image} className="bh-finder__sizeCalculatorImage" alt={title} />
-    <span className="bh-finder__sizeCalculatorTipText">
-      <p className="bh-finder__sizeCalculatorTipTitle">{title}</p>
-      <ul className="list-unstyled">
+  <div className="flex flex-col items-center mt-6 md:mt-0 md:flex-row md:items-start md:ml-12">
+    <img src={image} className="max-w-250" alt={title} />
+    <span className="w-full md:w-auto md:ml-4">
+      <p className="font-bold text-center md:text-left">{title}</p>
+      <ul className="list-none">
         {list.map((item, index) => (
-          <li key={index} className="bh-finder__sizeCalculatorItem">
+          <li key={index} className="pl-5 text-left mb-2">
+            <span class="text-green-500">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 inline-block align-middle mr-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M18.293 3.293a1 1 0 00-1.414-1.414l-10 10a1 1 0 00-.21.324l-4 8a1 1 0 001.635 1.1l3.658-5.657L16.95 5.95a1 1 0 001.1-1.636z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </span>
             {item}
           </li>
         ))}
@@ -59,7 +73,7 @@ function SizeCalculator({ show, setSize }) {
     formData.append("ubu", baseSize);
     formData.append("bu", secondSize);
 
-    fetch("/?cl=sb_calc_size&fnc=calcSize", {
+    fetch("https://sugarshape.de/?cl=sb_calc_size&fnc=calcSize", {
       method: "POST",
       body: formData,
     })
@@ -87,9 +101,9 @@ function SizeCalculator({ show, setSize }) {
 
   return (
     <div>
-      <div className="bh-finder__sizeCalculator">
-        <div className="bh-finder__sizeCalculatorForm">
-          <p className="bh-finder__sizeCalculatorFormTitle">Deine Maße</p>
+      <div className="flex flex-col mt-5 md:flex-row">
+        <div className="w-full md:w-1/3">
+          <p className="font-bold my-2">Deine Maße</p>
           <form onSubmit={onSubmit}>
             <SizeInput
               value={baseSize}
@@ -101,40 +115,42 @@ function SizeCalculator({ show, setSize }) {
               placeholder="Brustumfang (cm)"
               onChange={setSecondSize}
             />
-            <button type="submit" className="submitButton btn btn-primary">
+            <button
+              type="submit"
+              className="py-2 px-4 rounded shadow bg-[#333] border-[#333] hover:bg-[#999] text-white font-semibold border hover:border-[#999]"
+            >
               {result.success ? "NEU" : "JETZT"} BERECHNEN
             </button>
           </form>
           {resultText && (
-            <div className="bh-finder__sizeCalculatorResult">{resultText}</div>
+            <div className="font-bold my-4 md:my-2">{resultText}</div>
           )}
 
           {result.success && (
             <button
               type="button"
-              className="submitButton btn btn-primary"
+              className="py-2 px-4 rounded shadow bg-[#333] border-[#333] hover:bg-[#999] text-white font-semibold border hover:border-[#999]"
               onClick={() => setSize(result.ubu, result.bu)}
             >
               GRÖßE WÄHLEN
             </button>
           )}
 
-          <a className="bh-finder__tapeMeasure" href="/shop/Massband.html">
-            <img
-              className="bh-finder__button_icon"
-              src="/out/sugarshape/img/massband.png"
-              alt="SugarShape Massband"
-            />
+          <a
+            className="bg-[#efdadd] flex items-center w-full mt-4"
+            href="/shop/Massband.html"
+          >
+            <img src="/img/massband.png" alt="SugarShape Massband" />
             <div>
-              <span className="bh-finder__question_text">Kein Maßband?</span>
-              <u className="bh-finder__action_text">Jetzt Bestellen!</u>
+              <span>Kein Maßband?</span>
+              <u>Jetzt Bestellen!</u>
             </div>
           </a>
         </div>
 
-        <div className="bh-finder__sizeCalculatorInfo">
+        <div>
           <SizeTip
-            image="/out/sugarshape/img/1_Unterbrustumfang.png"
+            image="/img/1_Unterbrustumfang.png"
             title="Unterbrustumfang:"
             list={[
               `Maßband waagerecht unter den Brustansatz legen`,
@@ -144,7 +160,7 @@ function SizeCalculator({ show, setSize }) {
             ]}
           />
           <SizeTip
-            image="/out/sugarshape/img/2_brustumfang.png"
+            image="/img/2_brustumfang.png"
             title="Brustumfang:"
             list={[
               "Trage einen BH ohne Push-Up",

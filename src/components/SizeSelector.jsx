@@ -89,7 +89,7 @@ const groupedData = useMemo(() => {
         <div className="p-2 bg-white mb-4">
           <button
             onClick={() => setShowInfo(false)}
-            className="bh-finder__closeIcon"
+            className="float-right border-none block"
           >
             <i className="fa fa-times-circle" />
           </button>
@@ -101,19 +101,19 @@ const groupedData = useMemo(() => {
           </p>
         </div>
       )}
-      <div className={`${isAnswered ? "bh-finder__question--disabled" : ""}`}>
+      <div>
         <p>
           {question.sizeStepText(isSusSizeType)[0]}{" "}
           <i
-            className="fa fa-info-circle"
+            className="fa fa-info-circle cursor-pointer"
             onClick={() => setShowInfo(!showInfo)}
           />
         </p>
-        <ul className="bh-finder__sizeOptionList">
+        <ul className="p-0 flex flex-wrap">
             {firstValuesList.map((item) => {
-                const classes = `bh-finder__sizeOption ${
-                  item.isSelected ? " bh-finder__sizeOption--selected" : ""
-                } ${item.isActive ? " bh-finder__sizeOption--active" : ""}`;
+                const classes = `m-2 list-none border border-gray-300 p-2 rounded-md cursor-pointer ${
+                  item.isSelected ? " bg-gray-200" : ""
+                } ${item.isActive ? " border-[#e08699]" : ""}`;
 
                 return (
                     <li key={item.sus} className={classes} onClick={() => updateBaseSize(item.sus)}
@@ -130,19 +130,15 @@ const groupedData = useMemo(() => {
             <p>
               {question.sizeStepText(isSusSizeType)[1]}{" "}
               <i
-                className="fa fa-info-circle"
+                className="fa fa-info-circle cursor-pointer"
                 onClick={() => setShowInfo(!showInfo)}
               />
             </p>
-            <ul className="bh-finder__sizeOptionList">
+            <ul className="p-0 flex flex-wrap">
               {fullsizeList.map((item) => {
-                   const classes = `bh-finder__sizeOption ${
-                    item.isSelected ? " bh-finder__sizeOption--selected" : ""
-                  } ${item.isActive ? " bh-finder__sizeOption--active" : ""} ${
-                    item.isSelected && !item.isActive
-                      ? " bh-finder__sizeOption--disabled"
-                      : ""
-                  }`;
+                   const classes = `m-2 list-none border border-gray-300 p-2 rounded-md cursor-pointer ${
+                    item.isSelected ? " bg-gray-200" : ""
+                  } ${item.isActive ? " border-[#e08699]" : ""}`;
 
                   return (
                     <li

@@ -174,32 +174,6 @@ $mobile: "only screen and (min-width: 375px)";
   }
 }
 
-.bh-finder__sizeOptionList {
-  padding: 0;
-  display: flex;
-}
-
-.bh-finder__sizeOption {
-  margin: 4px;
-  list-style: none;
-  border: 1px solid gray;
-  padding: 6px 8px;
-  border-radius: 3px;
-  cursor: pointer;
-
-  .bh-finder__option {
-    padding: 8px;
-  }
-}
-
-.bh-finder__sizeOption--selected {
-  background-color: #eee;
-}
-
-.bh-finder__sizeOption--active {
-  border-color: #e08699;
-}
-
 .bh-finder__option .bh-finder__optionImage {
   max-width: 100px;
   display: block;
@@ -387,115 +361,9 @@ $mobile: "only screen and (min-width: 375px)";
   float: right;
 }
 
-.bh-finder__sizeCalculator {
-  display: flex;
-  flex-direction: column;
-
-  @media #{$tablet} {
-    flex-direction: row;
-  }
-}
-
-.bh-finder__sizeCalculatorForm {
-  min-width: 100%;
-  @media #{$tablet} {
-    min-width: 30%;
-  }
-}
-.bh-finder__sizeCalculatorFormTitle {
-  font-weight: bold;
-  margin: 8px 0px;
-}
-
-.bh-finder__sizeCalculatorInput {
-  display: block;
-  width: 100%;
-  background: #fff;
-  border: 1px solid #cdcccb;
-  padding: 8px;
-  margin: 8px 0px;
-}
-
-.bh-finder__sizeCalculatorResult {
-  font-weight: bold;
-  margin: 16px 0px 8px 0px;
-}
-.bh-finder__tapeMeasure {
-  background-color: #efdadd;
-  display: flex;
-  width: 100%;
-  align-items: center;
-  margin-top: 16px;
-}
-
-.bh-finder__sizeCalculatorTipTitle {
-  font-weight: bold;
-  text-align: center;
-
-  @media #{$tablet} {
-    text-align: left;
-  }
-}
-.bh-finder__sizeCalculatorTipText {
-  width: 100%;
-  @media #{$tablet} {
-    width: auto;
-    margin-left: 16px;
-  }
-}
-.bh-finder__sizeCalculatorTip {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  margin: 24px 0 0 0;
-  @media #{$tablet} {
-    margin: 0 0 0 48px;
-    flex-direction: row;
-  }
-}
-
-.bh-finder__sizeCalculatorImage {
-  max-width: 250px;
-}
-
-.bh-finder__sizeCalculatorItem {
-  padding-left: 20px;
-  text-indent: -10px;
-  margin-bottom: 5px;
-
-  &:before {
-    content: "\f00c";
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    margin-right: 5px;
-  }
-}
-
 .bh-finder__linkButton {
   border: none;
   padding: 0;
   color: #e08699;
   text-decoration: underline;
-}
-
-.bh-finder__restartBar {
-  padding: 8px 15px;
-  background-color: #f9e7eb;
-  display: flex;
-  align-items: stretch;
-  @media #{$tablet} {
-    justify-content: flex-end;
-  }
-
-  button {
-    width: 100%;
-    @media #{$tablet} {
-      width: auto;
-    }
-  }
 }

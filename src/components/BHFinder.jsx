@@ -14,7 +14,6 @@ import QuestionReview from "./QuestionReview";
 import ProductResults from "./ProductResults";
 import ActionInfoBar from "./ActionInfoBar";
 import RestartBar from "./RestartBar";
-import AdditionalProductResults from "./AdditionalProductResults";
 
 function BHFinder() {
   const imageMobile = "bh-finder_header_small.jpg";
@@ -958,34 +957,7 @@ function BHFinder() {
         sizeConfigurations={sizeConfigurations}
         currencySign={currencySign}
       />
-      {/* 
-      {showResults && filterAttributeResults?.total > 0 && (
-        <AdditionalProductResults
-          name="attributeResults"
-          title={Config.results.attributeResults.title}
-          text={Config.results.attributeResults.text}
-          products={filterAttributeResults?.items}
-          total={filterAttributeResults?.total}
-          currentPage={attributesResultsPage}
-          setPage={(page) => setAttributesResultsPage(page)}
-          selectedOptions={selectedOptions}
-          optionId={"attributes"}
-          currencySign={currencySign}
-        />
-      )}
-      {(showResults && notRecommendedResults?.total) > 0 && (
-        <AdditionalProductResults
-          name="notRecommendedResults"
-          title={Config.results.notRecommendedResults.title}
-          text={Config.results.notRecommendedResults.text}
-          products={notRecommendedResults?.items}
-          total={notRecommendedResults?.total}
-          currentPage={notRecommendedPage}
-          setPage={(page) => setNotRecommendedPage(page)}
-          currencySign={currencySign}
-        />
-      )}
-      {showResults && <RestartBar resetFinder={resetFinder} />} */}
+      {showResults && <RestartBar resetFinder={resetFinder} />}
     </div>
   );
 }
