@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import { FC } from "react";
+import Config from "../lang/configDE";
 
 interface RestartBarProps {
   resetFinder: () => void;
@@ -14,7 +15,7 @@ const RestartBar: FC<RestartBarProps> = ({ resetFinder }) => {
         className="w-full md:w-auto py-2 px-4 rounded shadow bg-[#333] border-[#333] hover:bg-[#999] text-white font-semibold border hover:border-[#999]"
         onClick={onClickEvent}
       >
-        BH-Finder neu starten
+        {Config.restart}
       </button>
     </div>
   );

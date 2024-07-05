@@ -31,6 +31,7 @@ const configDE = {
     },
   },
   pageSize: 24,
+  restart: "BH-Finder neu starten",
   questions: [
     {
       id: "size",
