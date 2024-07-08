@@ -74,7 +74,7 @@ function Question(props) {
           {...props} isAnswered={isAnswered} />
         ) : (
           <ul
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2"
+          className="grid md:grid-cols-4 lg:grid-cols-5 gap-2 custom-grid"
           >
             {options.map((option) => {
               const optionStatus = selectedOptions.find(

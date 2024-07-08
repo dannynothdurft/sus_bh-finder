@@ -35,8 +35,8 @@ function Option({
       type={type}
       question={question}
       onClick={() => toggleOption()}
-      className={`p-1.5 border-2 border-white inline-block cursor-pointer bg-white text-center rounded-sm shadow-md transition-all duration-300 ease-in-out tablet:p-2 tablet:rounded-md tablet:border-2 tablet:border-opacity-100 tablet:hover:shadow-lg tablet:hover:border-opacity-0 tablet:bg-[#eee] tablet:opacity-100 ${
-        isSelected ? " border-[#e08699] bg-[#eee]" : ""
+      className={`p-1.5 border-2  inline-block cursor-pointer text-center rounded-sm shadow-md transition-all duration-300 ease-in-out tablet:p-2 tablet:rounded-md tablet:border-2 tablet:border-opacity-100 tablet:hover:shadow-lg tablet:hover:border-opacity-0 tablet:bg-[#eee] tablet:opacity-100 ${
+        isSelected ? " border-[#e08699] bg-[#eee]" : "border-white bg-white"
       }
         ${inactiveClass}
         ${

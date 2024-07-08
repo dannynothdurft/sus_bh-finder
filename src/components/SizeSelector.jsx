@@ -4,6 +4,9 @@ import { scroller } from "react-scroll";
 import { useSelector, useDispatch } from "react-redux";
 import { incrementFilterSize } from "../redux/reducers/filter";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleInfo, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+
 
 function SizeSelector({
   question,
@@ -91,7 +94,8 @@ const groupedData = useMemo(() => {
             onClick={() => setShowInfo(false)}
             className="float-right border-none block"
           >
-            <i className="fa fa-times-circle" />
+            <FontAwesomeIcon icon={faCircleXmark}/>
+
           </button>
           <p className="py-2">
             {question.sizeInfoText(() => {
@@ -102,18 +106,16 @@ const groupedData = useMemo(() => {
         </div>
       )}
       <div>
-        <p>
+        <p className="py-2">
           {question.sizeStepText(isSusSizeType)[0]}{" "}
-          <i
-            className="fa fa-info-circle cursor-pointer"
-            onClick={() => setShowInfo(!showInfo)}
-          />
+            <FontAwesomeIcon icon={faCircleInfo} className="cursor-pointer"
+            onClick={() => setShowInfo(!showInfo)}/>
         </p>
         <ul className="p-0 flex flex-wrap">
             {firstValuesList.map((item) => {
-                const classes = `m-2 list-none border border-gray-300 p-2 rounded-md cursor-pointer ${
-                  item.isSelected ? " bg-gray-200" : ""
-                } ${item.isActive ? " border-[#e08699]" : ""}`;
+                const classes = `m-2 list-none border p-2 rounded-sm cursor-pointer ${
+                  item.isSelected ? " bg-[#EEEEEE]" : "bg-[#FFF]"
+                } ${item.isActive ? " border-[#E08699]" : "border-gray-300"}`;
 
                 return (
                     <li key={item.sus} className={classes} onClick={() => updateBaseSize(item.sus)}
@@ -127,18 +129,16 @@ const groupedData = useMemo(() => {
         </ul>
         {fullsizeList && (
           <>
-            <p>
+            <p className="py-2">
               {question.sizeStepText(isSusSizeType)[1]}{" "}
-              <i
-                className="fa fa-info-circle cursor-pointer"
-                onClick={() => setShowInfo(!showInfo)}
-              />
+              <FontAwesomeIcon icon={faCircleInfo} className="cursor-pointer"
+            onClick={() => setShowInfo(!showInfo)}/>
             </p>
             <ul className="p-0 flex flex-wrap">
               {fullsizeList.map((item) => {
-                   const classes = `m-2 list-none border border-gray-300 p-2 rounded-md cursor-pointer ${
-                    item.isSelected ? " bg-gray-200" : ""
-                  } ${item.isActive ? " border-[#e08699]" : ""}`;
+                   const classes = `m-2 list-none border p-2 rounded-sm cursor-pointer ${
+                    item.isSelected ? " bg-[#EEEEEE]" : "bg-[#FFF]"
+                  } ${item.isActive ? " border-[#E08699]" : "border-gray-300"}`;
 
                   return (
                     <li
@@ -157,7 +157,7 @@ const groupedData = useMemo(() => {
           </>
         )}
         <button
-          className="block border-none text-[#333] bg-transparent px-2 py-1 inline-block underline hover:text-[#4d4b50]"
+          className="border-none text-[#333] bg-transparent px-2 py-1 inline-block underline hover:text-[#4d4b50]"
           bhf-ga4-tid="size_change"
           type={
             question.sizeTypeButtonText(isSusSizeType) !==
@@ -170,11 +170,11 @@ const groupedData = useMemo(() => {
           {question.sizeTypeButtonText(isSusSizeType)}
         </button>
         <div id={`sizeCalculator-${question.id}`}>
-          <p className="block mt-2">
+          <p className="mt-2 ml-2 inline-block">
             Du kennst Deine Größe noch nicht?&nbsp;
           </p>
           <button
-            className="block border-none text-[#333] bg-transparent px-2 py-1 inline-block underline hover:text-[#4d4b50] font-bold"
+            className="inline-block border-none text-[#333] bg-transparent px-2 py-1 underline hover:text-[#4d4b50] font-bold"
             bhf-ga4-tid="size_calculator"
             type={
               question.sizeCalculatorText(showCalculator) !==

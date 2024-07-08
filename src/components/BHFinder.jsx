@@ -528,17 +528,9 @@ function BHFinder() {
 
   // results
   const [results, setResults] = useState({});
-  const [attributeResults, setAttributeResults] = useState({});
-  const [notRecommendedResults, setNotRecommendedResults] = useState({});
-  const [filterAttributeResults, setFilterAttributeResults] = useState({});
 
   // for pagination
   const [resultsPage, setResultsPage] = useState(1);
-  const [attributesResultsPage, setAttributesResultsPage] = useState(1);
-  const [notRecommendedPage, setNotRecommendedPage] = useState(1);
-
-  // for sizes
-  const [showTwoSizeSelectors, setShowTwoSizeSelectors] = useState(false);
 
   const [activeSizeConfig, setActiveSizeConfig] = useState(null);
   const [lastSelectedSecondSize, setLastSelectedSecondSize] = useState("");
@@ -551,18 +543,6 @@ function BHFinder() {
     isDynamic: true,
     smooth: true,
     offset: 0,
-  };
-
-  const isOneSelected = () => {
-    const isselectedOptions = selectedOptions.some((item) =>
-      item.options.some((option) => option.status === "active")
-    );
-
-    return (
-      sizeConfigurations.some(
-        (configuration) => configuration.baseSize !== ""
-      ) || isselectedOptions
-    );
   };
 
   const updateSelectedOption = (questionId, optionTitle) => {
@@ -907,35 +887,6 @@ function BHFinder() {
 
   };
 
-  // if (
-  //   attributeResults.items &&
-  //   results.items &&
-  //   !filterAttributeResults.items
-  // ) {
-  //   function removeDuplicates(originalObj1, obj2) {
-  //     // Kopie von obj2 erstellen, um das Original nicht zu ändern
-  //     const obj2Copy = { ...obj2 };
-
-  //     // Überprüfen, ob items in obj1 und obj2 vorhanden sind
-  //     if (originalObj1.items && obj2Copy.items) {
-  //       const idsInObj1 = new Set(originalObj1.items.map((item) => item.id));
-
-  //       // Filtere die Elemente in obj2Copy, die bereits in obj1 enthalten sind
-  //       obj2Copy.items = obj2Copy.items.filter(
-  //         (item) => !idsInObj1.has(item.id)
-  //       );
-  //     }
-
-  //     return obj2Copy;
-  //   }
-
-  //   // Funktion aufrufen und das Ergebnis in einem neuen Objekt speichern
-  //   const newObj1 = removeDuplicates(results, attributeResults);
-
-  //   // Das Ergebnis ist in newObj1, und obj1 bleibt unverändert
-  //   setFilterAttributeResults(newObj1);
-  // }
-
   return (
     <div className="max-w-[1170px] mx-auto">
       <StartInfo
@@ -948,8 +899,7 @@ function BHFinder() {
       {Config.questions.map((question, index, array) => {
         if (
           (!question.display ||
-            (question?.display(hasSelectedSizes) && !showResults) ||
-            showTwoSizeSelectors) &&
+            question?.display(hasSelectedSizes) && !showResults) &&
           visibleQuestions.includes(question.id)
         ) {
           return (
@@ -987,7 +937,6 @@ function BHFinder() {
   
       <QuestionReview
         selectedOptions={selectedOptions}
-        isOneSelected={isOneSelected()}
         visibleQuestions={visibleQuestions}
         updateSelectedOption={updateSelectedOption}
         isSusSizeType={isSusSizeType}
@@ -997,6 +946,7 @@ function BHFinder() {
         hasSelectedSizes={hasSelectedSizes}
         setActiveSizeConfig={setActiveSizeConfig}
       />
+
       <ActionInfoBar
         total={count}
         visibleQuestions={visibleQuestions}
