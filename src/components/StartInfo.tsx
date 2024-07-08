@@ -51,10 +51,10 @@ const StartInfo: FC<StartInfoProps> = ({
         <p className="mb-5 lg:mb-12">{Config.welcomeText}</p>
         <button
           bhf-ga4-tid="start_button"
-          className={`w-full py-2 px-4 rounded shadow ${
+          className={`rounded shadow ${
             finderIsEnabled
               ? "bg-gray-300 cursor-not-allowed text-gray-600 border-gray-300"
-              : "bg-[#333] border-[#333] hover:bg-[#999] text-white font-semibold border hover:border-[#999]"
+              : "button button--primary"
           }`}
           onClick={() => {
             if (!visibleQuestions.length) {
