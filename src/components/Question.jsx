@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Option from "./Option";
 import AnimateHeight from "react-animate-height";
 import SizeSelector from "./SizeSelector";
@@ -48,7 +48,7 @@ function Question(props) {
         {step !== 1 && (
           <div className="relative border-t border-solid border-black border-opacity-30 mb-5">
             <span className="absolute top-[-10px] bg-[#F7F7F7] px-2" style={{ right: 'calc(50% - 6px)' }}>
-              <FontAwesomeIcon icon={faHeart} style={{ color: '##CFCFCF', fontSize: "1.3rem" }}/>
+              <FontAwesomeIcon icon={faHeart} style={{ color: '#CFCFCF', fontSize: "1.3rem" }}/>
             </span>
           </div>
         )}

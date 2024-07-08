@@ -1,11 +1,7 @@
-import React from "react";
 import Tile from "./Tile";
 import AnimateHeight from "react-animate-height";
-import Config from "../lang/configDE";
 
-function ProductList({ products, paginate, currentPage, total }) {
-  const pageCount = Math.ceil(total / Config.pageSize);
-
+function ProductList({ products }) {
   return products ? (
     <AnimateHeight duration={200} height={"auto"}>
       <ul className="ml--15 mr--15 p-0 boxwrapper clearfix">
@@ -17,16 +13,6 @@ function ProductList({ products, paginate, currentPage, total }) {
           </div>
         </div>
       </ul>
-      {pageCount > currentPage && (
-        <div className="flex text-center items-center justify-center">
-          <button
-            className="flex text-center text-2xl mt-[-6px] bg-[#4d4b50] p-4 w-[2em] h-[2em] rounded-full text-white border-none transition-colors duration-300 hover:bg-[#e08699]"
-            onClick={() => paginate(currentPage + 1)}
-          >
-            <i className="fa fa-plus flex items-center justify-center w-full h-full" />
-          </button>
-        </div>
-      )}
     </AnimateHeight>
   ) : null;
 }

@@ -18,7 +18,6 @@ import RestartBar from "./RestartBar";
 function BHFinder() {
   const imageMobile = "bh-finder_header_small.jpg";
   const imageDesktop = "bh-finder_header_large.jpg";
-  const currencySign = "€";
 
   const getInitIalOptions = () =>
     Config.questions.map((question) => {
@@ -529,9 +528,6 @@ function BHFinder() {
   // results
   const [results, setResults] = useState({});
 
-  // for pagination
-  const [resultsPage, setResultsPage] = useState(1);
-
   const [activeSizeConfig, setActiveSizeConfig] = useState(null);
   const [lastSelectedSecondSize, setLastSelectedSecondSize] = useState("");
   const [sizeConfigurations, setSizeConfigurations] = useState([]);
@@ -797,9 +793,6 @@ function BHFinder() {
     }
 
     setSelectedOptions(newState);
-
-    // reset pagination on option change
-    setResultsPage(1);
   };
 
   /**
@@ -899,7 +892,7 @@ function BHFinder() {
       {Config.questions.map((question, index, array) => {
         if (
           (!question.display ||
-            question?.display(hasSelectedSizes) && !showResults) &&
+            question?.display(hasSelectedSizes)) && !showResults &&
           visibleQuestions.includes(question.id)
         ) {
           return (
@@ -964,11 +957,8 @@ function BHFinder() {
         name="results"
         results={results}
         show={showResults}
-        currentPage={resultsPage}
-        setPage={(page) => setResultsPage(page)}
         selectedOptions={selectedOptions}
         sizeConfigurations={sizeConfigurations}
-        currencySign={currencySign}
       />
       {showResults && <RestartBar resetFinder={resetFinder} />}
     </div>

@@ -24,6 +24,21 @@ function SizeSelector({
   const [showCalculator, setShowCalculator] = useState(false);
   const [baseSize, setBaseSize] = useState()
   const [fullsizeList, setFullsizeList] = useState();
+  const [sortFull, setSortFull] = useState()
+
+  useEffect(() => {
+    if(fullsizeList) {
+      fullsizeList.sort((a, b) => {
+    // Extrahiere die Zahlenwerte aus sus und vergleiche sie
+    let susA = parseInt(a.sus.split(' | ')[1]);
+    let susB = parseInt(b.sus.split(' | ')[1]);
+    return susA - susB;
+  });
+  
+  setSortFull(fullsizeList)
+    }
+  }, [fullsizeList])
+  
   
   const { sizes } = useSelector((state) => state.sizes);
 
@@ -127,7 +142,7 @@ const groupedData = useMemo(() => {
                 );
             })}
         </ul>
-        {fullsizeList && (
+        {sortFull && (
           <>
             <p className="py-2">
               {question.sizeStepText(isSusSizeType)[1]}{" "}
@@ -135,7 +150,7 @@ const groupedData = useMemo(() => {
             onClick={() => setShowInfo(!showInfo)}/>
             </p>
             <ul className="p-0 flex flex-wrap">
-              {fullsizeList.map((item) => {
+              {sortFull.map((item) => {
                    const classes = `m-1 list-none border p-2 rounded-sm cursor-pointer ${
                     item.isSelected ? " bg-[#EEEEEE]" : "bg-[#FFF]"
                   } ${item.isActive ? " border-[#E08699]" : "border-gray-300"}`;
