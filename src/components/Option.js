@@ -10,6 +10,8 @@ function Option({
   type,
   showText = true,
 }) {
+  const shopifyURL = window.assetUrls;
+
   let inactiveClass = "";
 
   /**
@@ -58,7 +60,7 @@ function Option({
                 ? "max-w-full block mx-auto"
                 : "max-w-[100px] block mx-auto"
             }
-            src={`/img/${option.image}`}
+            src={`${shopifyURL}/${option.image}`}
           />
         ) : null
       ) : (
