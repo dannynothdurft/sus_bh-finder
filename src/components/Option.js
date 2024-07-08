@@ -60,7 +60,7 @@ function Option({
                 ? "max-w-full block mx-auto"
                 : "max-w-[100px] block mx-auto"
             }
-            src={`${shopifyURL}/${option.image}`}
+            src={`/cdn/shop/t/19/assets/${option.image}`}
           />
         ) : null
       ) : (

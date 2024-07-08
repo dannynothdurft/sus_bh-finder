@@ -308,7 +308,10 @@ function SizeCalculator({ show, setSize }) {
             className="bg-[#efdadd] flex items-center w-full mt-4"
             href="https://stage-sugarshape.myshopify.com/products/massband"
           >
-            <img src="/img/massband.png" alt="SugarShape Massband" />
+            <img
+              src="/cdn/shop/t/19/assets/massband.png"
+              alt="SugarShape Massband"
+            />
             <div>
               <span>Kein Maßband?</span>
               <u>Jetzt Bestellen!</u>
@@ -318,7 +321,7 @@ function SizeCalculator({ show, setSize }) {
 
         <div>
           <SizeTip
-            image="/img/1_Unterbrustumfang.png"
+            image="/cdn/shop/t/19/assets/1_Unterbrustumfang.png"
             title="Unterbrustumfang:"
             list={[
               `Maßband waagerecht unter den Brustansatz legen`,
@@ -328,7 +331,7 @@ function SizeCalculator({ show, setSize }) {
             ]}
           />
           <SizeTip
-            image="/img/2_brustumfang.png"
+            image="/cdn/shop/t/19/assets/2_brustumfang.png"
             title="Brustumfang:"
             list={[
               "Trage einen BH ohne Push-Up",
