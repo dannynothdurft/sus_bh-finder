@@ -5,7 +5,7 @@ import App from "./components/BHFinder";
 import "./styles/index.css";
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById("module--bh-finder") as HTMLElement
 );
 root.render(
   <React.StrictMode>
