@@ -32,15 +32,15 @@ function ActionInfoBar({
     hasSelectedSize
   );
 
-  const buttonClasses = `block cursor-pointer text-center tablet:min-w-[200px] stretch:w-full stretch:min-h-[40px] stretch:p-1.5 mobile:p-4 mobile:min-h-[50px]  bh-finder__next--stretch bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow ${
+  const buttonClasses = `py-2 px-4 rounded shadow bg-[#333] border-[#333] hover:bg-[#999] text-white font-semibold border hover:border-[#999] ${
     !next || visibleQuestions.length === 1 ? "bh-finder__next--right" : ""
   }`;
 
   return (
     hasSelectedSize ? 
-    <div className="p-2 sm:p-4 bg-[#f9e7eb] sticky bottom-0 flex gap-1 items-stretch flex-wrap justify-between">
+    <div className="p-2 sm:p-4 bg-[#f9e7eb] sticky bottom-0 flex gap-1 flex-wrap justify-end items-center">
       {visibleQuestions.length > 1 && (
-        <div className="p-0 sm:p-4 flex items-center justify-center flex-0 flex-none sm:flex-auto sm:border-0 sm:pr-0">
+        <div className="p-0 sm:p-4 flex items-center justify-start flex-0 flex-none sm:flex-auto sm:border-0 sm:pr-0">
           <span className="inline-block text-4xl">{total}</span>
           <span
             className="inline-block leading-none ml-1"
@@ -49,7 +49,7 @@ function ActionInfoBar({
         </div>
       )}
       {next && visibleQuestions.length > 1 && (
-        <div className="flex-none flex-grow-0 flex-shrink-0 w-29">
+        <div className="flex-none flex-grow-0 flex-shrink-0 w-29 mr-5">
           <button
             step={next}
             className="pl-0 leading-none text-base underline text-gray-800 font-semibold"

@@ -5,6 +5,9 @@ import SizeSelector from "./SizeSelector";
 import sortQuestionFilters from "../utils/sortQuestionFilters";
 import addCountsToOptions from "../utils/addCountsToOptions";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
+
 function Question(props) {
   const {
     question,
@@ -41,11 +44,11 @@ function Question(props) {
       duration={0}
       height={"auto"}
     >
-      <div id={question.id} className="mx-auto p-2.5 bg-[#f7f7f7]">
+      <div id={question.id} className="mx-auto p-2.5 bg-[#f7f7f7] pb-10">
         {step !== 1 && (
-          <div className="trenner trenner_cms opacity-20">
-            <span>
-              <i className="fa fa-heart border-[#f7f7f7] bg-[#f7f7f7]" />
+          <div className="relative border-t border-solid border-black border-opacity-30 mb-5">
+            <span className="absolute top-[-10px] bg-[#F7F7F7] px-2" style={{ right: 'calc(50% - 6px)' }}>
+              <FontAwesomeIcon icon={faHeart} style={{ color: '##CFCFCF', fontSize: "1.3rem" }}/>
             </span>
           </div>
         )}
@@ -65,7 +68,7 @@ function Question(props) {
         />
         {question.infoText && (
           <div
-            className="text-[1em] mt-2 mb-2"
+            className="text-[1em] mt-2"
             dangerouslySetInnerHTML={{ __html: question.infoText }}
           />
         )}
@@ -74,7 +77,7 @@ function Question(props) {
           {...props} isAnswered={isAnswered} />
         ) : (
           <ul
-          className="grid grid-cols-1 mm-sm:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2"
+          className="mt-3 grid grid-cols-1 mm-sm:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2"
           >
             {options.map((option) => {
               const optionStatus = selectedOptions.find(
@@ -101,7 +104,7 @@ function Question(props) {
         {isAnswered && (
           <div className="text-right">
             <button
-              className="btn btn-primary-dark"
+              className="py-2 px-4 rounded shadow bg-[#333] border-[#333] hover:bg-[#999] text-white font-semibold border hover:border-[#999]"
               onClick={() => changeConfiguration(question.id)}
             >
               Auswahl ändern

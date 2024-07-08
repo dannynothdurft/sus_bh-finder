@@ -113,7 +113,7 @@ const groupedData = useMemo(() => {
         </p>
         <ul className="p-0 flex flex-wrap">
             {firstValuesList.map((item) => {
-                const classes = `m-2 list-none border p-2 rounded-sm cursor-pointer ${
+                const classes = `m-1 list-none border p-2 rounded-sm cursor-pointer ${
                   item.isSelected ? " bg-[#EEEEEE]" : "bg-[#FFF]"
                 } ${item.isActive ? " border-[#E08699]" : "border-gray-300"}`;
 
@@ -136,7 +136,7 @@ const groupedData = useMemo(() => {
             </p>
             <ul className="p-0 flex flex-wrap">
               {fullsizeList.map((item) => {
-                   const classes = `m-2 list-none border p-2 rounded-sm cursor-pointer ${
+                   const classes = `m-1 list-none border p-2 rounded-sm cursor-pointer ${
                     item.isSelected ? " bg-[#EEEEEE]" : "bg-[#FFF]"
                   } ${item.isActive ? " border-[#E08699]" : "border-gray-300"}`;
 
@@ -189,9 +189,8 @@ const groupedData = useMemo(() => {
         </div>
         <SizeCalculator
           show={showCalculator}
-          setSize={(baseSize, secondSize) => {
+          setSize={() => {
             setIsSusSizeType(true);
-            //updateSizeConfig(baseSize, secondSize);
           }}
         />
       </div>
