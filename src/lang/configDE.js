@@ -6,8 +6,7 @@ const configDE = {
   successText: "Juhuu, wir haben <strong>11 Artikel<strong> für Dich gefunden",
   selectionTitle: "Deine Auswahl",
   nextButtonText: "WEITER",
-  nextButtonTextNoSize:
-    'WEITER <span class="bh-finder__next--hint">(ohne Größe)</span>',
+  nextButtonTextNoSize: 'WEITER <span class="text-[13px]">(ohne Größe)</span>',
   resultsButtonText: "Ergebnis anzeigen",
   quickResultsButtonText: "Überspringen und <br /> Ergebnisse anzeigen",
   resultsLabel: "Artikel<br />gefunden",
@@ -58,7 +57,10 @@ const configDE = {
         <>
           Du willst einen <strong>perfekt sitzenden BH</strong>? Dann nutze
           unsere{" "}
-          <button onClick={toggleCalculator} className="bh-finder__linkButton">
+          <button
+            onClick={toggleCalculator}
+            className="border-none p-0 text-[#e08699] underline"
+          >
             Anleitung
           </button>{" "}
           und miss Dich aus, um Deine SugarShape-Größe in 2 Schritten zu

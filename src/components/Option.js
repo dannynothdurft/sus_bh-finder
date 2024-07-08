@@ -35,11 +35,13 @@ function Option({
       type={type}
       question={question}
       onClick={() => toggleOption()}
-      className={`bh-finder__option ${
-        isSelected ? " bh-finder__option--active" : ""
+      className={`p-1.5 border-2 border-white inline-block cursor-pointer bg-white text-center rounded-sm shadow-md transition-all duration-300 ease-in-out tablet:p-2 tablet:rounded-md tablet:border-2 tablet:border-opacity-100 tablet:hover:shadow-lg tablet:hover:border-opacity-0 tablet:bg-[#eee] tablet:opacity-100 ${
+        isSelected ? " border-[#e08699] bg-[#eee]" : ""
       }
         ${inactiveClass}
-        ${small ? " bh-finder__option--small" : ""}
+        ${
+          small ? " max-h-12 inline-flex items-center justify-center gap-1" : ""
+        }
         `}
       bhf-ga4-tid={question}
       bhf-ga4-tse={option.track}
@@ -53,8 +55,8 @@ function Option({
             title={option.title}
             className={
               option.fullSize
-                ? "bh-finder__optionImage-big"
-                : "bh-finder__optionImage"
+                ? "max-w-full block mx-auto"
+                : "max-w-[100px] block mx-auto"
             }
             src={`/img/${option.image}`}
           />
@@ -84,7 +86,7 @@ function Option({
             ></div>
 
             <p
-              className="mt-2 text-left small-text"
+              className="mt-2 text-left text-base"
               bhf-ga4-tid={question}
               bhf-ga4-tse={option.track}
             >

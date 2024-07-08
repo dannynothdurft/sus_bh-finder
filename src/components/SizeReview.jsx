@@ -11,14 +11,14 @@ function SizeReview({
 
 
   return (
-    <div className="bh-finder__selectionWrapper bh-finder__selectionWrapper--size">
+    <div className="w-full tablet:w-[100%]">
       <p className="bh-finder__selectionText">
         {isSusSizeType ? `SugarShape Größe:` : `Standardgröße:`}
       </p>
-      <ul className="bh-finder__selection">
+      <ul className="px-0 sm:px-4">
               
                 <li
-                  className="bh-finder__option bh-finder__option--small"
+                  className="bh-finder__option max-h-12 inline-flex items-center justify-center gap-1"
                 >
                   <i className="fa fa-times" />{" "}
                   {filterSize}
@@ -29,30 +29,3 @@ function SizeReview({
 }
 
 export default SizeReview
-
-// {/* <div className="bh-finder__selectionWrapper bh-finder__selectionWrapper--size">
-//       <p className="bh-finder__selectionText">
-//         {isSusSizeType ? `SugarShape Größe:` : `Standardgröße:`}
-//       </p>
-//       <ul className="bh-finder__selection">
-//         {sizeConfigurations.map((configuration, configurationIndex) => {
-//           const { baseSize, secondSizes } = configuration;
-
-//           return secondSizes.map((size) => {
-//             return (
-//               <span key={`${baseSize}-${size}`}>
-//                 <li
-//                   onClick={() => {
-//                     resetSizeConfig(configurationIndex, size);
-//                   }}
-//                   className="bh-finder__option bh-finder__option--small"
-//                 >
-//                   <i className="fa fa-times" />{" "}
-//                   {isSusSizeType ? `${baseSize}/${size}` : `${baseSize}${size}`}
-//                 </li>
-//               </span>
-//             );
-//           });
-//         })}
-//       </ul>
-//     </div> */}

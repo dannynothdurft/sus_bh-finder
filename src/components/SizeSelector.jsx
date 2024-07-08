@@ -157,7 +157,7 @@ const groupedData = useMemo(() => {
           </>
         )}
         <button
-          className="bh-finder__sizeLink"
+          className="block border-none text-[#333] bg-transparent px-2 py-1 inline-block underline hover:text-[#4d4b50]"
           bhf-ga4-tid="size_change"
           type={
             question.sizeTypeButtonText(isSusSizeType) !==
@@ -170,11 +170,11 @@ const groupedData = useMemo(() => {
           {question.sizeTypeButtonText(isSusSizeType)}
         </button>
         <div id={`sizeCalculator-${question.id}`}>
-          <p className="bh-finder__sizeLinkText">
+          <p className="block mt-2">
             Du kennst Deine Größe noch nicht?&nbsp;
           </p>
           <button
-            className="bh-finder__sizeLink bh-finder__sizeLink--bold"
+            className="block border-none text-[#333] bg-transparent px-2 py-1 inline-block underline hover:text-[#4d4b50] font-bold"
             bhf-ga4-tid="size_calculator"
             type={
               question.sizeCalculatorText(showCalculator) !==

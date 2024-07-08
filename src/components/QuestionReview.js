@@ -9,8 +9,8 @@ function QuestionReview(props) {
   // TODO add validation for lastSelectedSecondSize
   if (!isOneSelected) return null;
   return (
-    <div className="bh-finder__deselectFilterWrapper">
-      <p className="bh-finder__deselectFilterTitle">{Config.selectionTitle}</p>
+    <div className="p-2 sm:p-4 bg-[#f7f7f7] border-t border-opacity-30">
+      <p className="mb-0 font-bold">{Config.selectionTitle}</p>
 
       <SizeReview {...props} />
 

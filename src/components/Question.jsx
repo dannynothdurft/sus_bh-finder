@@ -99,7 +99,7 @@ function Question(props) {
           </ul>
         )}
         {isAnswered && (
-          <div className="bh-finder__question-edit">
+          <div className="text-right">
             <button
               className="btn btn-primary-dark"
               onClick={() => changeConfiguration(question.id)}

@@ -5,9 +5,9 @@ function Tile({ product, position }) {
   const [imgSrc, setImgSrc] = useState(product.node.images.nodes[0].url);
 
   return (
-    <div className="productData productData col-xxs col-xs-4 col-sm-3 col-md-3 productBox">
+    <div className="mb-2.5 px-2 productBox min-w-[140px]">
       <div
-        className="picture text-center"
+        className="block w-full mb-1.25"
         onMouseOver={() => setImgSrc(product.node.images.nodes[1].url)}
         onMouseOut={() => setImgSrc(product.node.images.nodes[0].url)}
       >
@@ -18,11 +18,11 @@ function Tile({ product, position }) {
           target="_blank"
           rel="noreferrer noopener"
         >
-          <div className="picture-wrapper">
+          <div className="block w-full h-auto max-h-full m-0 p-0 overflow-hidden">
             {isSale && <div className="isSale">SALE</div>}
             <img
               alt={product.node.title}
-              className="img-responsive img-lazy"
+              className="m-auto top-0 left-0 min-w-full min-h-full border-0 object-cover object-center"
               src={imgSrc}
               position={position}
             />
