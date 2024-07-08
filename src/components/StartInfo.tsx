@@ -31,10 +31,10 @@ const StartInfo: FC<StartInfoProps> = ({
     <div className="flex flex-wrap bg-[#F7F7F7] md:flex-nowrap">
       <div className="relative w-full md:w-[65%]">
         <picture>
-          <source media="(min-width: 720PX)" srcSet={`/img/${imageDesktop}`} />
-          <source srcSet={`/img/${imageMobile}`} />
+          <source media="(min-width: 720PX)" srcSet={imageDesktop} />
+          <source srcSet={imageMobile} />
           <img
-            src={`/img/${imageMobile}`}
+            src={imageMobile}
             alt="hier muss noch was hin"
             className="w-full"
           />

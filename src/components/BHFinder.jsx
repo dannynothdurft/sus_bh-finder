@@ -16,8 +16,8 @@ import ActionInfoBar from "./ActionInfoBar";
 import RestartBar from "./RestartBar";
 
 function BHFinder() {
-  const imageMobile = "bh-finder_header_small.jpg";
-  const imageDesktop = "bh-finder_header_large.jpg";
+  const imageMobile = "https://cdn.shopify.com/s/files/1/0855/3601/4616/files/bhf-motsi-small.jpg?v=1720433450";
+  const imageDesktop = "https://cdn.shopify.com/s/files/1/0855/3601/4616/files/bhf-motsi-large.jpg?v=1720433451";
 
   const getInitIalOptions = () =>
     Config.questions.map((question) => {
