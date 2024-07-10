@@ -32,27 +32,27 @@ function ActionInfoBar({
     hasSelectedSize
   );
 
-  const buttonClasses = `button button--primary ${
+  const buttonClasses = `bh-finder__next  bh-finder__next--stretch button button--primary ${
     !next || visibleQuestions.length === 1 ? "bh-finder__next--right" : ""
   }`;
 
   return (
     hasSelectedSize ? 
-    <div className="p-2 sm:p-4 bg-[#f9e7eb] sticky bottom-0 flex gap-1 flex-wrap justify-end items-center">
+    <div className="bh-finder__actionBar">
       {visibleQuestions.length > 1 && (
-        <div className="p-0 sm:p-4 flex items-center justify-start flex-0 flex-none sm:flex-auto sm:border-0 sm:pr-0">
-          <span className="inline-block text-4xl">{total}</span>
+        <div className="bh-finder__actionBar--total">
+          <span className="bh-finder__resultsCount">{total}</span>
           <span
-            className="inline-block leading-none ml-1"
+            className="bh-finder__resultsLabel"
             dangerouslySetInnerHTML={{ __html: Config.resultsLabel }}
           />
         </div>
       )}
       {next && visibleQuestions.length > 1 && (
-        <div className="flex-none flex-grow-0 flex-shrink-0 w-29 mr-5">
+        <div className="bh-finder__resultLinkWrapper">
           <button
             step={next}
-            className="pl-0 leading-none text-base underline text-gray-800 font-semibold"
+            className="bh-finder__resultLink"
             onClick={() => updateVisibleQuestions()}
             dangerouslySetInnerHTML={{
               __html: Config.quickResultsButtonText,

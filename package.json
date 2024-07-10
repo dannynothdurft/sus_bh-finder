@@ -29,7 +29,7 @@
     "start": "react-scripts start",
     "build": "npm-run-all build:**",
     "build:create": "react-scripts build",
-    "build:copy": "cp build/static/js/main*.js ../../stage/shopify/assets/module--bh-finder.js"
+    "build:copy-all": "cp build/static/js/main*.js ../../stage/shopify/assets/module--bh-finder.js && cp build/static/css/main*.css ../../stage/shopify/assets/module--bh-finder.css"
   },
   "eslintConfig": {
     "extends": [

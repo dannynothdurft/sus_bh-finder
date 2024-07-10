@@ -881,7 +881,7 @@ function BHFinder() {
   };
 
   return (
-    <div className="max-w-[1170px] mx-auto">
+    <div data-scheme="dark" className="max-w-[1170px] mx-auto">
       <StartInfo
         visibleQuestions={visibleQuestions}
         updateVisibleQuestions={updateVisibleQuestions}
