@@ -32,7 +32,7 @@ function ActionInfoBar({
     hasSelectedSize
   );
 
-  const buttonClasses = `py-2 px-4 rounded shadow bg-[#333] border-[#333] hover:bg-[#999] text-white font-semibold border hover:border-[#999] ${
+  const buttonClasses = `button button--primary ${
     !next || visibleQuestions.length === 1 ? "bh-finder__next--right" : ""
   }`;
 

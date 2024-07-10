@@ -104,7 +104,7 @@ function Question(props) {
         {isAnswered && (
           <div className="text-right">
             <button
-              className="py-2 px-4 rounded shadow bg-[#333] border-[#333] hover:bg-[#999] text-white font-semibold border hover:border-[#999]"
+              className="button button--primary"
               onClick={() => changeConfiguration(question.id)}
             >
               Auswahl ändern

@@ -1,0 +1,42 @@
+/* -----------------------------------------------------------------------
+	SUGARSHAPE VARIABLES
+----------------------------------------------------------------------- */
+/*
+  screen size theme + tailwind
+  sm: '576px',
+  md: '750px',
+  lg: '990px',
+  xl: '1200px', // 1360
+*/
+
+:root {
+
+  // icons
+  --sus-elem-li-icon-size: 13px;
+  --sus-elem-icon-size: 22px;
+
+  // colors
+  --sus-color-gray: #4d4b50;
+  --sus-color-gray-light-1: #7b797e;
+  --sus-color-gray-light-2: #cdcccb;
+  --sus-color-gray-light-3: #eee;
+  --sus-color-gray-light-4: #f8f8f8;
+
+  --sus-color-brand: #e08699;
+  --sus-color-brand-light-1: #ecb6c2;
+  --sus-color-brand-light-2: #ecb6c2;
+  --sus-color-brand-light-3: #f3cfd6;
+  --sus-color-brand-light-4: #f9e7eb;
+
+  --sus-color-brand-variant-1: #ede2d6;
+  --sus-color-brand-variant-2: #b56472;
+  
+  --sus-color-brand-smallfontsize: #d57788;
+  --sus-color-text: #333;
+  --sus-color-text-hover: #888; //#666;
+  --sus-color-hover: #666;
+
+  // effects
+  --sus-duration: 0.5s; // transition duration
+
+}

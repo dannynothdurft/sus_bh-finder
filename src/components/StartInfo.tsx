@@ -35,7 +35,7 @@ const StartInfo: FC<StartInfoProps> = ({
           <source srcSet={imageMobile} />
           <img
             src={imageMobile}
-            alt="hier muss noch was hin"
+            alt="BH-Finder Start Bild"
             className="w-full"
           />
         </picture>
@@ -53,7 +53,7 @@ const StartInfo: FC<StartInfoProps> = ({
           bhf-ga4-tid="start_button"
           className={`rounded shadow ${
             finderIsEnabled
-              ? "bg-gray-300 cursor-not-allowed text-gray-600 border-gray-300"
+              ? "button button--secondary"
               : "button button--primary"
           }`}
           onClick={() => {
