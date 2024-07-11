@@ -14,9 +14,9 @@ function Selection({ question, selectedOptions, toggleOption }) {
 
   return (
     show && (
-      <div id={question.id} className="w-[50%] tablet:w-[50%]">
-        <p className="m-0">{question.aText}</p>
-        <ul className="px-0 sm:px-4">
+      <div id={question.id} className="bh-finder__selectionWrapper bh-finder__selectionWrapper--selection">
+        <p className="bh-finder__selectionText">{question.aText}</p>
+        <ul className="bh-finder__selection">
           {question.options.map(
             (option) =>
               selectedOptions.find((item) => item.title === option.title)

@@ -11,14 +11,14 @@ function SizeReview({
 
 
   return (
-    <div className="w-full tablet:w-[100%]">
+    <div className="bh-finder__selectionWrapper bh-finder__selectionWrapper--size">
       <p className="bh-finder__selectionText">
         {isSusSizeType ? `SugarShape Größe:` : `Standardgröße:`}
       </p>
-      <ul className="px-0 sm:px-4">
+      <ul className="bh-finder__selection">
               
                 <li
-                  className="bh-finder__option max-h-12 inline-flex items-center justify-center gap-1"
+                  className="bh-finder__option bh-finder__option--small"
                 >
                   <i className="fa fa-times" />{" "}
                   {filterSize}

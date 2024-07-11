@@ -10,9 +10,9 @@ const RestartBar: FC<RestartBarProps> = ({ resetFinder }) => {
     resetFinder();
   };
   return (
-    <div className="px-4 py-2 bg-[#f9e7eb] flex items-stretch md:justify-end">
+    <div className="bh-finder__restartBar">
       <button
-        className="w-full md:w-auto py-2 px-4 rounded shadow bg-[#333] border-[#333] hover:bg-[#999] text-white font-semibold border hover:border-[#999]"
+        className="bh-finder__next button button--primary"
         onClick={onClickEvent}
       >
         {Config.restart}

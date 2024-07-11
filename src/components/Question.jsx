@@ -44,7 +44,7 @@ function Question(props) {
       duration={0}
       height={"auto"}
     >
-      <div id={question.id} className="mx-auto p-2.5 bg-[#f7f7f7] pb-10">
+      <div id={question.id} className={`bh-finder__questionWrapper`}>
         {step !== 1 && (
           <div className="relative border-t border-solid border-black border-opacity-30 mb-5">
             <span className="absolute top-[-10px] bg-[#F7F7F7] px-2" style={{ right: 'calc(50% - 6px)' }}>
@@ -54,21 +54,21 @@ function Question(props) {
         )}
 
         {step <= totalSteps && (
-          <span className="text-white bg-[#4d4b50] rounded-[2px] py-1 px-2 text-[0.8em]">{`${step} von ${totalSteps}`}</span>
+          <span className="bh-finder__indicator">{`${step} von ${totalSteps}`}</span>
         )}
         {question.preText && (
           <div
-            className="text-[1em] mt-2"
+            className="bh-finder__questionText"
             dangerouslySetInnerHTML={{ __html: question.preText }}
           />
         )}
         <p
-          className="text-[1em] mt-2 font-bold"
+          className="bh-finder__questionText bh-finder__questionText--bold"
           dangerouslySetInnerHTML={{ __html: question.text }}
         />
         {question.infoText && (
           <div
-            className="text-[1em] mt-2"
+            className="bh-finder__questionText"
             dangerouslySetInnerHTML={{ __html: question.infoText }}
           />
         )}
@@ -77,7 +77,7 @@ function Question(props) {
           {...props} isAnswered={isAnswered} />
         ) : (
           <ul
-          className="mt-3 grid grid-cols-1 mm-sm:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2"
+          className={`bh-finder__question ${isAnswered ? 'bh-finder__question--disabled' : ''}`}
           >
             {options.map((option) => {
               const optionStatus = selectedOptions.find(
@@ -102,7 +102,7 @@ function Question(props) {
           </ul>
         )}
         {isAnswered && (
-          <div className="text-right">
+          <div className="bh-finder__question-edit">
             <button
               className="button button--primary"
               onClick={() => changeConfiguration(question.id)}

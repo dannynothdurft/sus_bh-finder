@@ -31,9 +31,9 @@ function ProductResults({
 
   if (!!!total) {
     return fallbackText ? (
-      <div className="mx-auto p-2 sm:p-4 bg-[#f7f7f7]">
+      <div className="bh-finder__productListWrapper">
         <p
-          className="mt-0 italic text-[13px]"
+          className="bh-finder__hint"
           dangerouslySetInnerHTML={{
             __html: fallbackText,
           }}
@@ -82,7 +82,7 @@ function ProductResults({
     const optionValues = activeOptions.map((activeOption) => {
       return activeOption.map(
         (value) => `
-        <span class="underline">${value}</span>
+        <span class="bh-finder__productListWrapper-option">${value}</span>
         `
       );
     });
@@ -92,13 +92,13 @@ function ProductResults({
     return markup.join(" und ").trim() + ".";
   }
 
-  const titleClasses = "p-0 text-base text-lg mt-10";
+  const titleClasses = "bh-finder__welcomeText bh-finder__otherResultsTitle";
 
   const activeOptionsMarkup = getActiveOptionsMarkup(getActiveOptions());
 
   return (
     <>
-      <div className="mx-auto p-2 sm:p-4 bg-[#f7f7f7]">
+      <div className="bh-finder__productListWrapper">
         <Element name={name} />
         <p
           className={titleClasses}
@@ -116,7 +116,7 @@ function ProductResults({
         {total < 5 && <p>{Config.results.textFewResultsPost}</p>}
 
         <p
-          className="mt-0 italic text-[13px]"
+          className="bh-finder__hint"
           dangerouslySetInnerHTML={{
             __html: hint,
           }}

@@ -104,15 +104,15 @@ const groupedData = useMemo(() => {
   return (
     <>
       {showInfo && (
-        <div className="p-2 bg-white mb-4">
+        <div className="bh-finder__sizeInfoTextWrapper">
           <button
             onClick={() => setShowInfo(false)}
-            className="float-right border-none block"
+            className="bh-finder__closeIcon"
           >
             <FontAwesomeIcon icon={faCircleXmark}/>
 
           </button>
-          <p className="py-2">
+          <p className="bh-finder__sizeInfoText">
             {question.sizeInfoText(() => {
               setShowCalculator(true);
               scroller.scrollTo(`sizeCalculator-${question.id}`, scrollOptions);
@@ -120,17 +120,17 @@ const groupedData = useMemo(() => {
           </p>
         </div>
       )}
-      <div>
-        <p className="py-2">
+      <div className={`${isAnswered ? 'bh-finder__question--disabled' : ''}`}>
+        <p>
           {question.sizeStepText(isSusSizeType)[0]}{" "}
             <FontAwesomeIcon icon={faCircleInfo} className="cursor-pointer"
             onClick={() => setShowInfo(!showInfo)}/>
         </p>
-        <ul className="p-0 flex flex-wrap">
+        <ul className="bh-finder__sizeOptionList">
             {firstValuesList.map((item) => {
-                const classes = `m-1 list-none border p-2 rounded-sm cursor-pointer ${
-                  item.isSelected ? " bg-[#EEEEEE]" : "bg-[#FFF]"
-                } ${item.isActive ? " border-[#E08699]" : "border-gray-300"}`;
+                const classes = `bh-finder__sizeOption ${
+                  item.isSelected ? ' bh-finder__sizeOption--selected' : ''
+                } ${item.isActive ? ' bh-finder__sizeOption--active' : ''}`
 
                 return (
                     <li key={item.sus} className={classes} onClick={() => updateBaseSize(item.sus)}
@@ -149,11 +149,15 @@ const groupedData = useMemo(() => {
               <FontAwesomeIcon icon={faCircleInfo} className="cursor-pointer"
             onClick={() => setShowInfo(!showInfo)}/>
             </p>
-            <ul className="p-0 flex flex-wrap">
+            <ul className="bh-finder__sizeOptionList">
               {sortFull.map((item) => {
-                   const classes = `m-1 list-none border p-2 rounded-sm cursor-pointer ${
-                    item.isSelected ? " bg-[#EEEEEE]" : "bg-[#FFF]"
-                  } ${item.isActive ? " border-[#E08699]" : "border-gray-300"}`;
+                    const classes = `bh-finder__sizeOption ${
+                      item.isSelected ? ' bh-finder__sizeOption--selected' : ''
+                    } ${item.isActive ? ' bh-finder__sizeOption--active' : ''} ${
+                      item.isSelected && !item.isActive
+                        ? ' bh-finder__sizeOption--disabled'
+                        : ''
+                    }`
 
                   return (
                     <li
@@ -172,7 +176,7 @@ const groupedData = useMemo(() => {
           </>
         )}
         <button
-          className="border-none text-[#333] bg-transparent px-2 py-1 inline-block underline hover:text-[#4d4b50]"
+          className="bh-finder__sizeLink"
           bhf-ga4-tid="size_change"
           type={
             question.sizeTypeButtonText(isSusSizeType) !==
@@ -185,11 +189,11 @@ const groupedData = useMemo(() => {
           {question.sizeTypeButtonText(isSusSizeType)}
         </button>
         <div id={`sizeCalculator-${question.id}`}>
-          <p className="mt-2 ml-2 inline-block">
-            Du kennst Deine Größe noch nicht?&nbsp;
+          <p className="bh-finder__sizeLinkText">
+            Du kennst Deine Größe noch nicht?
           </p>
           <button
-            className="inline-block border-none text-[#333] bg-transparent px-2 py-1 underline hover:text-[#4d4b50] font-bold"
+            className="bh-finder__sizeLink bh-finder__sizeLink--bold"
             bhf-ga4-tid="size_calculator"
             type={
               question.sizeCalculatorText(showCalculator) !==

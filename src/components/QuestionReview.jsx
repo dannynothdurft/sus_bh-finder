@@ -11,8 +11,8 @@ function QuestionReview(props) {
   if (!filterSize) return null;
 
   return (
-    <div className="p-2 sm:p-4 bg-[#f7f7f7] border-t border-solid border-black border-opacity-30">
-      <p className="mb-0 font-bold">{Config.selectionTitle}</p>
+    <div className="bh-finder__deselectFilterWrapper">
+      <p className="bh-finder__deselectFilterTitle">{Config.selectionTitle}</p>
       <SizeReview {...props} />
       {Config.questions.map((question) => (
         <Selection

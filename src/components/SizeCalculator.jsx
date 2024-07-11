@@ -17,13 +17,13 @@ const SizeInput = ({ value = "", placeholder = "", onChange }) => (
 );
 
 const SizeTip = ({ image = "", title = "", list = [] }) => (
-  <div className="flex flex-col items-center mt-6 md:mt-0 md:flex-row md:items-start md:ml-12">
-    <img src={image} className="max-w-250" alt={title} />
-    <span className="w-full md:w-auto md:ml-4">
-      <p className="font-bold text-center md:text-left">{title}</p>
-      <ul className="list-none">
+  <div className="bh-finder__sizeCalculatorTip">
+    <img src={image} className="bh-finder__sizeCalculatorImage" alt={title}/>
+    <span className="bh-finder__sizeCalculatorTipText">
+      <p className="bh-finder__sizeCalculatorTipTitle">{title}</p>
+      <ul className="list-unstyled">
         {list.map((item, index) => (
-          <li key={index} className="pl-5 text-left mb-2">
+          <li key={index} className="bh-finder__sizeCalculatorItem">
             <FontAwesomeIcon
               icon={faCheck}
               className="inline-block align-middle mr-2"
@@ -269,9 +269,9 @@ function SizeCalculator({ show, setSize }) {
 
   return (
     <div>
-      <div className="flex flex-col mt-5 md:flex-row">
-        <div className="w-full md:w-1/3">
-          <p className="font-bold my-2">Deine Maße</p>
+       <div className="bh-finder__sizeCalculator">
+        <div className="bh-finder__sizeCalculatorForm">
+          <p className="bh-finder__sizeCalculatorFormTitle">Deine Maße</p>
           <form onSubmit={onSubmit}>
             <SizeInput
               value={baseSize}
@@ -285,19 +285,19 @@ function SizeCalculator({ show, setSize }) {
             />
             <button
               type="submit"
-              className="py-2 px-4 rounded shadow bg-[#333] border-[#333] hover:bg-[#999] text-white font-semibold border hover:border-[#999]"
+              className="rounded shadow button button--primary"
             >
               {result.success ? "NEU" : "JETZT"} BERECHNEN
             </button>
           </form>
           {resultText && (
-            <div className="font-bold my-4 md:my-2">{resultText}</div>
+            <div className="bh-finder__sizeCalculatorResult">{resultText}</div>
           )}
 
           {result.success && (
             <button
               type="button"
-              className="py-2 px-4 rounded shadow bg-[#333] border-[#333] hover:bg-[#999] text-white font-semibold border hover:border-[#999]"
+              className="rounded shadow button button--primary"
               onClick={() => setSize(result.ubu, result.bu)}
             >
               GRÖßE WÄHLEN
@@ -305,21 +305,22 @@ function SizeCalculator({ show, setSize }) {
           )}
 
           <a
-            className="bg-[#efdadd] flex items-center w-full mt-4"
+            className="bh-finder__tapeMeasure"
             href="https://stage-sugarshape.myshopify.com/products/massband"
           >
             <img
+            className="bh-finder__button_icon"
               src="/cdn/shop/t/19/assets/massband.png"
               alt="SugarShape Massband"
             />
             <div>
-              <span>Kein Maßband?</span>
-              <u>Jetzt Bestellen!</u>
+              <span className="bh-finder__question_text">Kein Maßband?</span>
+              <u className="bh-finder__action_text">Jetzt Bestellen!</u>
             </div>
           </a>
         </div>
 
-        <div>
+        <div className="bh-finder__sizeCalculatorInfo">
           <SizeTip
             image="/cdn/shop/t/19/assets/1_Unterbrustumfang.png"
             title="Unterbrustumfang:"
