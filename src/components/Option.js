@@ -37,13 +37,12 @@ function Option({
       type={type}
       question={question}
       onClick={() => toggleOption()}
-      className={`p-1.5 border-2  inline-block cursor-pointer text-center rounded-sm shadow-md transition-all duration-300 ease-in-out tablet:p-2 tablet:rounded-md tablet:border-2 tablet:border-opacity-100 tablet:hover:shadow-lg tablet:hover:border-opacity-0 tablet:bg-[#eee] tablet:opacity-100 ${
-        isSelected ? " border-[#e08699] bg-[#eee]" : "border-white bg-white"
+      className={`bh-finder__option ${
+        isSelected ? " bh-finder__option--active" : ""
       }
         ${inactiveClass}
-        ${
-          small ? " max-h-12 inline-flex items-center justify-center gap-1" : ""
-        }
+          ${small ? " bh-finder__option--small" : ""}
+
         `}
       bhf-ga4-tid={question}
       bhf-ga4-tse={option.track}
@@ -55,11 +54,7 @@ function Option({
             bhf-ga4-tse={option.track}
             alt={question}
             title={option.title}
-            className={
-              option.fullSize
-                ? "max-w-full block mx-auto"
-                : "max-w-[100px] block mx-auto"
-            }
+            className="bh-finder__optionImage"
             src={`/cdn/shop/t/19/assets/${option.image}`}
           />
         ) : null
