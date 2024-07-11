@@ -290,6 +290,8 @@ function BHFinder() {
 
     if(step === 2) {
 
+      let empty;
+
       const hasActiveStatus = selectedOptions[step - 1].options
       .map(opt => opt.status)
       .some(status => status === 'active');
@@ -298,9 +300,16 @@ function BHFinder() {
       const filteredOne = step1.flatMap((art) => {
         return art.node.metafields.flatMap((meta) => {
           if (meta !== null) {
+            
             return selectedOptions[step - 1].options.flatMap((opt) => {
               if (opt.status === "active") {
-                return opt.filters.flatMap((filterName) => {
+                if(opt.title === "Ich bin für alles offen") {
+                  if(empty === undefined) {
+                    return empty = step1
+                  }
+                } else {
+                  return opt.filters.flatMap((filterName) => {
+                  console.log("ja")
                   if (filterName.name === meta.key && filterName.value === meta.value) {
                     if (opt.excludes.length > 0) {
                       const exclusionResult = opt.excludes.some((exc) => exc.name === meta.key && exc.value === meta.value);
@@ -313,6 +322,8 @@ function BHFinder() {
                   }
                   return [];
                 });
+                }
+                
               }
               return [];
             });
@@ -326,10 +337,18 @@ function BHFinder() {
           t.node.title === product.node.title
         ))
       );
-      
-      dispatch(incrementStep2(uniqueProducts))
+
+      if(empty) {
+        dispatch(incrementStep2(empty))
+      setStep(3);
+      setCount(empty.length)
+      } else {
+        dispatch(incrementStep2(uniqueProducts))
       setStep(3);
       setCount(uniqueProducts.length)
+      }
+      
+      
 
       if(nextQuestion === false) {
         setResults(uniqueProducts)
@@ -365,6 +384,8 @@ function BHFinder() {
 
     if(step === 3) {
 
+      let empty;
+
       const hasActiveStatus = selectedOptions[step - 1].options
       .map(opt => opt.status)
       .some(status => status === 'active');
@@ -376,6 +397,11 @@ function BHFinder() {
           if (meta !== null) {
             return selectedOptions[step - 1].options.flatMap((opt) => {
               if (opt.status === "active") {
+                if(opt.title === "Ich weiß es nicht.") {
+                  if(empty === undefined) {
+                    return empty = step2
+                  }
+                } else {
                 return opt.filters.flatMap((filterName) => {
                   if (filterName.name === meta.key && filterName.value === meta.value) {
                     if (opt.excludes.length > 0) {
@@ -387,8 +413,9 @@ function BHFinder() {
                     }
                     return [art];
                   }
+                  
                   return [];
-                });
+                });}
               }
               return [];
             });
@@ -403,9 +430,17 @@ function BHFinder() {
         ))
       );
       
-      dispatch(incrementStep3(uniqueProducts))
+      if(empty) {
+        dispatch(incrementStep3(empty))
+      setStep(4);
+      setCount(empty.length)
+      } else {
+dispatch(incrementStep3(uniqueProducts))
       setStep(4);
       setCount(uniqueProducts.length)
+      }
+
+      
 
       if(nextQuestion === false) {
         setResults(uniqueProducts)
@@ -439,6 +474,8 @@ function BHFinder() {
 
     if(step === 4) {
 
+      let empty;
+
       const hasActiveStatus = selectedOptions[step - 1].options
       .map(opt => opt.status)
       .some(status => status === 'active');
@@ -449,7 +486,13 @@ function BHFinder() {
         return art.node.metafields.flatMap((meta) => {
           if (meta !== null) {
             return selectedOptions[step - 1].options.flatMap((opt) => {
+
               if (opt.status === "active") {
+                if(opt.title === "Ich weiß es nicht.") {
+                  if(empty === undefined) {
+                    return empty = step3
+                  }
+                } else {
                 return opt.filters.flatMap((filterName) => {
                   if (filterName.name === meta.key && filterName.value === meta.value) {
                     if (opt.excludes.length > 0) {
@@ -464,6 +507,7 @@ function BHFinder() {
                   return [];
                 });
               }
+              }
               return [];
             });
           }
@@ -477,9 +521,18 @@ function BHFinder() {
         ))
       );
       
-      dispatch(incrementStep4(uniqueProducts))
+
+      if(empty) {
+        dispatch(incrementStep4(empty))
       setStep(4);
-      setCount(uniqueProducts.length)
+      setCount(empty.length)
+      } else {
+        dispatch(incrementStep4(uniqueProducts))
+        setStep(4);
+        setCount(uniqueProducts.length)
+      }
+
+      
 
       if(nextQuestion === false) {
         setResults(uniqueProducts)
@@ -800,7 +853,7 @@ function BHFinder() {
    * @param nextQuestion
    */
   const updateVisibleQuestions = (nextQuestion) => {
-    if(step1 === undefined && nextQuestion !== "size") {
+    if(nextQuestion === "attributes") {
       getArticels();
       setStep(step + 1)
     } else {
