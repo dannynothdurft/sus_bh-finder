@@ -4,10 +4,23 @@ function Tile({ product, position }) {
   const isSale = false;
   const [imgSrc, setImgSrc] = useState(product.node.images.nodes[0].url);
 
+
+  const findValueByKey = (array, searchKey, searchValue, returnKey) => {
+    for (const obj of array) {
+      if (obj[searchKey] === searchValue) {
+        return obj[returnKey];
+      }
+    }
+    return null;
+  };
+  
+  const SUSTYPE = findValueByKey(product.node.metafields, 'key', 'sugarshapetype', 'value');
+
+
   return (
-    <div className="productData productData col-xxs col-xs-4 col-sm-3 col-md-3 productBox">
+    <div>
       <div
-        className="picture text-center"
+        className="text-center"
         onMouseOver={() => setImgSrc(product.node.images.nodes[1].url)}
         onMouseOut={() => setImgSrc(product.node.images.nodes[0].url)}
       >
@@ -30,8 +43,8 @@ function Tile({ product, position }) {
         </a>
       </div>
 
-      <div className="listDetails text-center">
-        <div className="title">
+      <div className="listDetails">
+        <div>
           <a
             href={`https://stage-sugarshape.myshopify.com/products/${product.node.handle}`}
             className="title"
@@ -43,7 +56,8 @@ function Tile({ product, position }) {
           </a>
         </div>
 
-        <div className="SusTyp">{product.node.type}</div>
+        <div className="SusTyp">{SUSTYPE}</div>
+
         <div className="price text-center bh-finder-price">
           <div className="content">
             {isSale && (

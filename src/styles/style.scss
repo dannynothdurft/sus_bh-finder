@@ -3,6 +3,26 @@ $tablet: "only screen and (min-width: 720px)";
 $mobileMax: "only screen and (min-width: 470px)";
 $mobile: "only screen and (min-width: 375px)";
 
+.SusTyp {
+  color: #d57788;
+  display: inline-block;
+  width: 100%;
+  font-size: 12px;
+  line-height: 18px;
+  max-height: 18px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.listDetails {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .sus--bh-finder {
   max-width: 1170px;
   margin: 0 auto;
