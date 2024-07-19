@@ -10,8 +10,6 @@ function Option({
   type,
   showText = true,
 }) {
-  const shopifyURL = window.assetUrls;
-
   let inactiveClass = "";
 
   /**
@@ -55,7 +53,7 @@ function Option({
             alt={question}
             title={option.title}
             className="bh-finder__optionImage"
-            src={`/cdn/shop/t/19/assets/${option.image}`}
+            src={`/cdn/shop/t/16/assets/${option.image}`}
           />
         ) : null
       ) : (
