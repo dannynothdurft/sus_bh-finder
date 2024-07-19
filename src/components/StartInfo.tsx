@@ -20,10 +20,12 @@ const StartInfo: FC<StartInfoProps> = ({
   const { sizes } = useSelector((state: any) => state.sizes);
 
   const [finderIsEnabled, setFinderIsEnabled] = useState(true);
+  const [finderStart, setFinderStart] = useState(false);
 
   useEffect(() => {
     if (sizes) {
       setFinderIsEnabled(false);
+      setFinderStart(true);
     }
   }, [sizes]);
 
@@ -41,23 +43,27 @@ const StartInfo: FC<StartInfoProps> = ({
       <div className="startInfo__content">
         <h1>{Config.title}</h1>
         <p className="bh-finder__welcomeText">{Config.welcomeText}</p>
-        <button
-          bhf-ga4-tid="start_button"
-          className={`bh-finder__next rounded shadow ${
-            finderIsEnabled
-              ? "button button--secondary"
-              : "button button--primary"
-          }`}
-          onClick={() => {
-            if (!visibleQuestions.length) {
-              updateVisibleQuestions(QuestionToShow);
-              setFinderIsEnabled(true);
-            }
-          }}
-          disabled={finderIsEnabled}
-        >
-          {Config.startButtonText}
-        </button>
+        {finderStart ? (
+          <button
+            bhf-ga4-tid="start_button"
+            className={`bh-finder__next rounded shadow ${
+              finderIsEnabled
+                ? "button button--secondary"
+                : "button button--primary"
+            }`}
+            onClick={() => {
+              if (!visibleQuestions.length) {
+                updateVisibleQuestions(QuestionToShow);
+                setFinderIsEnabled(true);
+              }
+            }}
+            disabled={finderIsEnabled}
+          >
+            {Config.startButtonText}
+          </button>
+        ) : (
+          <p className="text-center">BH-Finder startet gleich</p>
+        )}
       </div>
     </div>
   );

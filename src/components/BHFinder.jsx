@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { scroller } from "react-scroll";
 import Config from "../lang/configDE";
+import { toast } from "react-toastify";
+
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
@@ -134,7 +136,9 @@ function BHFinder() {
   }, [sizes, dispatch]);
 
   const getArticels = async () => {
+    toast.info("Deine Größe wird überprüft")
     try {
+      
       const response = await fetch(
         "https://stage-sugarshape.myshopify.com/api/2024-04/graphql.json",
         {
@@ -270,6 +274,8 @@ function BHFinder() {
       const result = await response.json();
       dispatch(incrementStep1(result.data.search.edges));
       setCount(result.data.search.totalCount);
+
+      toast.dismiss();
 
       scroller.scrollTo('attributes', {
         duration: 400,
