@@ -192,6 +192,7 @@ const groupedData = useMemo(() => {
           <p className="bh-finder__sizeLinkText">
             Du kennst Deine Größe noch nicht?
           </p>
+          {" "}
           <button
             className="bh-finder__sizeLink bh-finder__sizeLink--bold"
             bhf-ga4-tid="size_calculator"
