@@ -163,6 +163,7 @@ function BHFinder() {
                       title
                       handle
                       id
+                      availableForSale
                       priceRange{
                           minVariantPrice{
                               amount
@@ -272,8 +273,11 @@ function BHFinder() {
       }
 
       const result = await response.json();
-      dispatch(incrementStep1(result.data.search.edges));
-      setCount(result.data.search.totalCount);
+
+      const availableForSale = result.data.search.edges.filter(edge => edge.node.availableForSale);
+
+      dispatch(incrementStep1(availableForSale));
+      setCount(availableForSale.length);
 
       toast.dismiss();
 
@@ -962,7 +966,7 @@ dispatch(incrementStep3(uniqueProducts))
                 updateSelectedOption(question.id, key, wildcard)
               }
               step={index + 1}
-              totalSteps={array.length - 1}
+              totalSteps={array.length}
               isVisible={visibleQuestions.includes(question.id)}
               isAnswered={answeredQuestions.includes(question.id)}
               sizes={sizes}

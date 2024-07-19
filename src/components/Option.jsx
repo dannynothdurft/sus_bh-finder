@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faX } from '@fortawesome/free-solid-svg-icons'
+
 function Option({
   option,
   question,
@@ -54,14 +57,12 @@ function Option({
             title={option.title}
             className="bh-finder__optionImage"
             src={`/cdn/shop/t/16/assets/${option.image}`}
+            style={question === "breastform" ? {width: "100%"} : null}
           />
         ) : null
       ) : (
-        <i
-          className="fa fa-times"
-          bhf-ga4-tid={question}
-          bhf-ga4-tse={option.track}
-        />
+        
+        <FontAwesomeIcon icon={faX}/>
       )}
 
       <p

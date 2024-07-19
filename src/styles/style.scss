@@ -338,7 +338,7 @@ $mobile: "only screen and (min-width: 375px)";
 .bh-finder__sizeOption {
   margin: 4px;
   list-style: none;
-  border: 1px solid gray;
+  box-shadow: 0 0 2px rgba(77, 75, 80, 0.5);
   padding: 6px 8px;
   border-radius: 3px;
   cursor: pointer;
@@ -353,7 +353,7 @@ $mobile: "only screen and (min-width: 375px)";
 }
 
 .bh-finder__sizeOption--active {
-  border-color: #e08699;
+  box-shadow: 0 0 2px 1px #e08699;
 }
 
 .bh-finder__option .bh-finder__optionImage {

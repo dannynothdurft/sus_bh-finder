@@ -1,5 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faX } from '@fortawesome/free-solid-svg-icons'
 
 function SizeReview({
   isSusSizeType = false,
@@ -20,7 +22,7 @@ function SizeReview({
                 <li
                   className="bh-finder__option bh-finder__option--small"
                 >
-                  <i className="fa fa-times" />{" "}
+                  <FontAwesomeIcon icon={faX}/>{" "}
                   {filterSize}
                 </li>
       </ul>

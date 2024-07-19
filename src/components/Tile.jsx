@@ -63,14 +63,14 @@ function Tile({product, position }) {
             {isSale && (
               <span className="oldPrice sb_pink">
                 <del>
-                  {String(product.node.priceRange.minVariantPrice.amount)}
-                  {product.node.priceRange.minVariantPrice.currencyCode}
-                </del>{" "}
+                  {String(product.node.priceRange.minVariantPrice.amount)}{" "}
+                  { product.node.priceRange.minVariantPrice.currencyCode === "EUR" ? "€" : product.node.priceRange.minVariantPrice.currencyCode }
+                </del>
               </span>
             )}
             <span className="lead text-nowrap">
-              {String(product.node.priceRange.minVariantPrice.amount)}
-              {product.node.priceRange.minVariantPrice.currencyCode}
+              {String(product.node.priceRange.minVariantPrice.amount)}{" "}
+              { product.node.priceRange.minVariantPrice.currencyCode === "EUR" ? "€" : product.node.priceRange.minVariantPrice.currencyCode }
             </span>
           </div>
         </div>
