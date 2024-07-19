@@ -310,7 +310,7 @@ function SizeCalculator({ show, setSize }) {
           >
             <img
             className="bh-finder__button_icon"
-              src="/cdn/shop/t/19/assets/massband.png"
+              src="/cdn/shop/t/16/assets/massband.png"
               alt="SugarShape Massband"
             />
             <div>
@@ -322,7 +322,7 @@ function SizeCalculator({ show, setSize }) {
 
         <div className="bh-finder__sizeCalculatorInfo">
           <SizeTip
-            image="/cdn/shop/t/19/assets/1_Unterbrustumfang.png"
+            image="/cdn/shop/t/16/assets/1_Unterbrustumfang.png"
             title="Unterbrustumfang:"
             list={[
               `Maßband waagerecht unter den Brustansatz legen`,
@@ -332,7 +332,7 @@ function SizeCalculator({ show, setSize }) {
             ]}
           />
           <SizeTip
-            image="/cdn/shop/t/19/assets/2_brustumfang.png"
+            image="/cdn/shop/t/16/assets/2_brustumfang.png"
             title="Brustumfang:"
             list={[
               "Trage einen BH ohne Push-Up",
