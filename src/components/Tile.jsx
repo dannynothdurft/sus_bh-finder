@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-function Tile({ product, position }) {
+function Tile({product, position }) {
   const isSale = false;
   const [imgSrc, setImgSrc] = useState(product.node.images.nodes[0].url);
 
 
   const findValueByKey = (array, searchKey, searchValue, returnKey) => {
     for (const obj of array) {
-      if (obj[searchKey] === searchValue) {
+      if (obj && obj[searchKey] === searchValue) {
         return obj[returnKey];
       }
     }

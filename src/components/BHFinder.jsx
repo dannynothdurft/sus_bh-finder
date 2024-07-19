@@ -61,7 +61,7 @@ function BHFinder() {
               body: JSON.stringify({
                 query: `
               query {
-                products(first: 250, query: "product_type:bra OR product_type:bra.body OR product_type:bra.bralette OR product_type:bra.sport OR product_type:bra.swim") {
+                products(first: 250, query: "product_type:bra*") {
                   edges {
                     node {
                       id
@@ -198,12 +198,12 @@ function BHFinder() {
                   "key": "kollektion"
                 },
                 {
-                  "namespace": "produkt",
-                  "key": "sugarshapetype"
-                },
-                {
                   "namespace": "allgemein",
                   "key": "spitze"
+                },
+                {
+                  "namespace": "produkt",
+                  "key": "sugarshapetype"
                 },
                 {
                     "namespace": "bhs",
@@ -216,10 +216,6 @@ function BHFinder() {
                 {
                   "namespace": "bhs",
                   "key": "wattierung"
-                },
-                {
-                  "namespace": "farbe",
-                  "key": "hex"
                 },
                 {
                   "namespace": "farbe",
@@ -309,7 +305,6 @@ function BHFinder() {
                   }
                 } else {
                   return opt.filters.flatMap((filterName) => {
-                  console.log("ja")
                   if (filterName.name === meta.key && filterName.value === meta.value) {
                     if (opt.excludes.length > 0) {
                       const exclusionResult = opt.excludes.some((exc) => exc.name === meta.key && exc.value === meta.value);
